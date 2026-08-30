@@ -490,6 +490,14 @@ function App() {
 
   const [nicheDrafts, setNicheDrafts] =
     useState<Record<string, string>>({});
+  // 🚪 BAKE 003 — THE HOUSE
+  const [houseView, setHouseView] =
+    useState<"drawer" | "hall" | "journal">("drawer");
+
+  const [journalDraft, setJournalDraft] = useState("");
+
+  const [journalEntries, setJournalEntries] =
+    useState<Array<{ id: string; date: string; text: string }>>([]);
 
   // ----------------------------------------------------------
   // 🔄 Launch sequence
@@ -1802,6 +1810,254 @@ function App() {
       ? nicheDrafts[selectedNiche.id] ?? ""
       : "";
 
+    // ========================================================
+    // 📕 JOURNAL
+    // ========================================================
+
+    const saveJournalEntry = () => {
+      const text = journalDraft.trim();
+
+      if (!text) return;
+
+      setJournalEntries((current) => [
+        {
+          id: Date.now().toString(),
+          date: new Date().toLocaleString(),
+          text,
+        },
+        ...current,
+      ]);
+
+      setJournalDraft("");
+    };
+
+    if (houseView === "journal") {
+      return (
+        <div className="life-room-content house-room journal-room">
+          <div className="house-room-toolbar">
+            <button
+              className="house-back-button"
+              onClick={() => setHouseView("hall")}
+            >
+              ← Back to Front Hall
+            </button>
+
+            <span className="house-location-plaque">
+              📕 THE JOURNAL
+            </span>
+          </div>
+
+          <div className="journal-scene">
+            <div className="journal-book">
+              <div className="journal-book-ribbon" />
+
+              <div className="journal-page journal-page-left">
+                <div className="journal-date">
+                  {new Date().toLocaleDateString(undefined, {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
+
+                <h3>What's on your mind?</h3>
+
+                <p>
+                  No streaks. No score. No guilt. This is just a page
+                  that belongs to you.
+                </p>
+
+                <textarea
+                  className="journal-writing-area"
+                  value={journalDraft}
+                  onChange={(event) => setJournalDraft(event.target.value)}
+                  placeholder="Today..."
+                />
+
+                <button
+                  className="journal-save-button"
+                  onClick={saveJournalEntry}
+                >
+                  📌 Keep this page
+                </button>
+              </div>
+
+              <div className="journal-page journal-page-right">
+                <div className="journal-history-heading">
+                  <span>📚</span>
+                  Previous pages
+                </div>
+
+                {journalEntries.length === 0 ? (
+                  <div className="journal-empty">
+                    <div className="journal-empty-doodle">🌱</div>
+                    <strong>The book is quiet.</strong>
+                    <span>Your first page can be about literally anything.</span>
+                  </div>
+                ) : (
+                  <div className="journal-entry-stack">
+                    {journalEntries.map((entry) => (
+                      <article
+                        className="journal-entry"
+                        key={entry.id}
+                      >
+                        <small>{entry.date}</small>
+                        <p>{entry.text}</p>
+                      </article>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+
+    // ========================================================
+    // 🏡 FRONT HALL
+    // ========================================================
+
+    if (houseView === "hall") {
+      return (
+        <div className="life-room-content house-room front-hall-room">
+          <div className="house-room-toolbar">
+            <button
+              className="house-back-button"
+              onClick={() => setHouseView("drawer")}
+            >
+              ← Back to Junk Drawer
+            </button>
+
+            <span className="house-location-plaque">
+              🏡 FRONT HALL
+            </span>
+          </div>
+
+          <div className="front-hall-heading">
+            <span className="front-hall-heading-icon">🚪</span>
+
+            <div>
+              <h3>Before I leave...</h3>
+              <p>
+                That weird little room where you stand for ten seconds
+                wondering what you've forgotten.
+              </p>
+            </div>
+          </div>
+
+          <div className="front-hall-scene">
+            <div className="hall-wall">
+
+              <div className="hall-window">
+                <div className="hall-window-sky">
+                  <span className="hall-cloud hall-cloud-one">☁</span>
+                  <span className="hall-cloud hall-cloud-two">☁</span>
+                  <span className="hall-window-tree">🌳</span>
+                </div>
+
+                <div className="hall-window-cross hall-window-cross-v" />
+                <div className="hall-window-cross hall-window-cross-h" />
+              </div>
+
+              <div className="leaving-board">
+                <div className="leaving-board-title">
+                  DON'T LEAVE WITHOUT...
+                </div>
+
+                <div className="leaving-things">
+                  <div className="leaving-thing">
+                    <span>📱</span>
+                    <strong>PHONE</strong>
+                  </div>
+
+                  <div className="leaving-thing">
+                    <span>👛</span>
+                    <strong>WALLET</strong>
+                  </div>
+
+                  <div className="leaving-thing">
+                    <span>🔑</span>
+                    <strong>KEYS</strong>
+                  </div>
+                </div>
+
+                <small>...and whatever Future You forgot to mention.</small>
+              </div>
+
+              <div className="hall-file-cabinet">
+                <div className="file-drawer">
+                  <span>DOCUMENTS</span>
+                  <div className="file-handle" />
+                </div>
+
+                <div className="file-drawer">
+                  <span>PAPERWORK</span>
+                  <div className="file-handle" />
+                </div>
+
+                <div className="file-drawer">
+                  <span>???</span>
+                  <div className="file-handle" />
+                </div>
+              </div>
+
+              <button
+                className="journal-object"
+                onClick={() => setHouseView("journal")}
+                title="Open Journal"
+              >
+                <span className="journal-object-pages" />
+
+                <span className="journal-object-cover">
+                  <span>🌱</span>
+                  <strong>JOURNAL</strong>
+                </span>
+              </button>
+
+              <div className="hall-side-table">
+                <div className="hall-table-top">
+                  <span className="hall-table-mail">✉️</span>
+                  <span className="hall-table-keys">🔑</span>
+                </div>
+
+                <div className="hall-table-leg hall-table-leg-left" />
+                <div className="hall-table-leg hall-table-leg-right" />
+              </div>
+
+              <div className="hall-shoes">
+                <span>👟</span>
+                <span>👟</span>
+              </div>
+
+              <div className="hall-baseboard" />
+            </div>
+
+            <div className="hall-floor">
+              <div className="hall-rug">
+                <span>YOU PROBABLY GOT EVERYTHING</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="hall-whisper">
+            <span>🌱</span>
+
+            <div>
+              <strong>First hallway acquired.</strong>
+              <small>
+                Right now the journal is the only door that opens.
+                The rest of the house can grow when we want it.
+              </small>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+
     const addNicheEntry = () => {
       if (!selectedNiche || !currentDraft.trim()) return;
 
@@ -2077,6 +2333,29 @@ function App() {
             </p>
           </div>
         </div>
+
+        <button
+          className="house-doorway-card"
+          onClick={() => setHouseView("hall")}
+        >
+          <span className="house-door-frame">
+            <span className="house-door">
+              <span className="house-door-panel house-door-panel-top" />
+              <span className="house-door-panel house-door-panel-bottom" />
+              <span className="house-door-knob" />
+            </span>
+          </span>
+
+          <span className="house-door-copy">
+            <small>THERE'S MORE BACK HERE...</small>
+            <strong>THE REST OF THE HOUSE</strong>
+            <span>
+              Front hall • Journal • and whatever rooms we build next
+            </span>
+          </span>
+
+          <span className="house-door-arrow">→</span>
+        </button>
 
         <div className="junk-drawer-sign">
           <span>🧷</span>

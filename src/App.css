@@ -5919,3 +5919,795 @@ footer {
 
 
 /* 🍬 END LIFE WALLET NICHE POP PASS 002.F */
+
+/* ==========================================================
+   🚪 LIFE WALLET HOUSE MODE 003
+   ========================================================== */
+
+.house-doorway-card {
+  width: 100%;
+  min-height: 116px;
+  margin: 2px 0 18px;
+  padding: 12px 18px 12px 14px;
+
+  display: grid;
+  grid-template-columns: 82px 1fr 34px;
+  align-items: center;
+  gap: 14px;
+
+  position: relative;
+  overflow: hidden;
+
+  border: 3px solid #684023;
+  border-radius: 18px;
+
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255,255,255,.35), transparent 30%),
+    linear-gradient(180deg, #90c95c 0%, #6ea947 48%, #558637 100%);
+
+  color: #fffbea;
+  text-align: left;
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 4px 0 rgba(255,255,255,.25),
+    inset 0 -6px 0 rgba(53,74,31,.25),
+    0 6px 0 #51331f,
+    0 10px 15px rgba(54,33,18,.25);
+
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.house-doorway-card:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.07) saturate(1.1);
+}
+
+.house-door-frame {
+  width: 65px;
+  height: 86px;
+  padding: 6px 6px 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  border-radius: 9px 9px 2px 2px;
+
+  background:
+    linear-gradient(90deg, #6d4327, #a26b3d 35%, #7a4c2d 70%, #56331f);
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.2),
+    0 4px 6px rgba(49,28,15,.3);
+}
+
+.house-door {
+  width: 49px;
+  height: 74px;
+  position: relative;
+
+  border: 2px solid #5b351f;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+
+  background:
+    linear-gradient(90deg, #bf7442, #e59a58 48%, #ac6339);
+}
+
+.house-door-panel {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+
+  border: 2px solid rgba(92,48,24,.48);
+  border-radius: 3px;
+}
+
+.house-door-panel-top {
+  top: 10px;
+  height: 19px;
+}
+
+.house-door-panel-bottom {
+  top: 36px;
+  height: 25px;
+}
+
+.house-door-knob {
+  position: absolute;
+  right: 5px;
+  top: 37px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: #f4ce62;
+}
+
+.house-door-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.house-door-copy small {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+}
+
+.house-door-copy strong {
+  font-size: 19px;
+}
+
+.house-door-copy > span {
+  font-size: 11px;
+}
+
+.house-door-arrow {
+  font-size: 28px;
+  font-weight: 900;
+}
+
+
+/* 🏡 shared room */
+
+.house-room-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 14px;
+}
+
+.house-back-button {
+  padding: 9px 14px;
+
+  border: 2px solid #654127;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(180deg, #f0c37b, #ca8b4c);
+
+  color: #56351f;
+  font-weight: 900;
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.35),
+    0 4px 0 #755033;
+}
+
+.house-location-plaque {
+  padding: 8px 13px;
+
+  border: 2px solid #684126;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(180deg, #9d6138, #71452b);
+
+  color: #fff2c9;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+}
+
+
+/* 🚪 front hall */
+
+.front-hall-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 14px;
+}
+
+.front-hall-heading-icon {
+  font-size: 38px;
+}
+
+.front-hall-heading h3 {
+  margin: 0;
+  color: #563720;
+  font-size: 22px;
+}
+
+.front-hall-heading p {
+  margin: 4px 0 0;
+  color: #826042;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.front-hall-scene {
+  overflow: hidden;
+
+  border: 4px solid #684329;
+  border-radius: 20px;
+
+  box-shadow:
+    0 7px 0 #4e311f,
+    0 12px 18px rgba(64,40,24,.23);
+}
+
+.hall-wall {
+  min-height: 345px;
+  position: relative;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 82px,
+      rgba(126,89,54,.055) 83px,
+      rgba(126,89,54,.055) 84px
+    ),
+    linear-gradient(180deg, #fae8ba 0%, #f2d598 100%);
+}
+
+.hall-window {
+  position: absolute;
+  left: 24px;
+  top: 25px;
+
+  width: 135px;
+  height: 126px;
+  padding: 8px;
+
+  border: 5px solid #865633;
+  border-radius: 8px;
+
+  background: #c48b55;
+}
+
+.hall-window-sky {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  border: 2px solid #684126;
+
+  background:
+    linear-gradient(180deg, #7dd4ee 0%, #b9ebee 68%, #80bf64 69%, #5e9a47);
+}
+
+.hall-cloud {
+  position: absolute;
+  color: rgba(255,255,255,.8);
+  font-size: 28px;
+}
+
+.hall-cloud-one {
+  left: 12px;
+  top: 3px;
+}
+
+.hall-cloud-two {
+  right: 5px;
+  top: 35px;
+}
+
+.hall-window-tree {
+  position: absolute;
+  right: 4px;
+  bottom: -7px;
+  font-size: 48px;
+}
+
+.hall-window-cross {
+  position: absolute;
+  z-index: 3;
+  background: #855632;
+}
+
+.hall-window-cross-v {
+  top: 8px;
+  bottom: 8px;
+  left: calc(50% - 3px);
+  width: 6px;
+}
+
+.hall-window-cross-h {
+  left: 8px;
+  right: 8px;
+  top: calc(50% - 3px);
+  height: 6px;
+}
+
+.leaving-board {
+  position: absolute;
+  left: 180px;
+  right: 180px;
+  top: 23px;
+
+  padding: 12px 15px;
+
+  border: 4px solid #8b5a34;
+  border-radius: 9px;
+
+  background: #c9975c;
+  color: #56361f;
+  text-align: center;
+}
+
+.leaving-board-title {
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.leaving-things {
+  display: flex;
+  justify-content: center;
+  gap: 11px;
+}
+
+.leaving-thing {
+  min-width: 66px;
+  padding: 7px 6px 5px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  border-radius: 6px;
+
+  background:
+    linear-gradient(180deg, #fff7d2, #f5dfa2);
+
+  box-shadow:
+    0 3px 4px rgba(74,44,25,.14);
+}
+
+.leaving-thing span {
+  font-size: 21px;
+}
+
+.leaving-thing strong {
+  font-size: 9px;
+}
+
+.leaving-board small {
+  display: block;
+  margin-top: 7px;
+  font-size: 9px;
+}
+
+.hall-file-cabinet {
+  position: absolute;
+  left: 27px;
+  bottom: 18px;
+
+  width: 126px;
+  padding: 8px;
+
+  border: 4px solid #6c543d;
+  border-radius: 7px;
+
+  background:
+    linear-gradient(90deg, #8b775f, #b8a58a 52%, #89745d);
+}
+
+.file-drawer {
+  height: 42px;
+  margin-bottom: 6px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #66513f;
+  border-radius: 3px;
+
+  background:
+    linear-gradient(180deg, #c8b79d, #a18d72);
+
+  color: #514536;
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.file-handle {
+  position: absolute;
+  bottom: 5px;
+
+  width: 36px;
+  height: 5px;
+
+  background: #786856;
+}
+
+.journal-object {
+  position: absolute;
+  left: calc(50% - 64px);
+  bottom: 40px;
+
+  width: 128px;
+  height: 98px;
+
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  transform: rotate(-3deg);
+
+  transition: transform 130ms ease;
+}
+
+.journal-object:hover {
+  transform: rotate(-1deg) translateY(-7px) scale(1.05);
+}
+
+.journal-object-pages {
+  position: absolute;
+  left: 9px;
+  right: 2px;
+  bottom: 0;
+
+  height: 75px;
+
+  border: 3px solid #60422b;
+  border-radius: 7px 12px 12px 7px;
+
+  background: #fff3c6;
+}
+
+.journal-object-cover {
+  position: absolute;
+  inset: 0 8px 9px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid #4d3322;
+  border-radius: 8px 12px 12px 8px;
+
+  background:
+    linear-gradient(135deg, #43865a, #2f6847 58%, #255039);
+
+  color: #f8e7aa;
+}
+
+.journal-object-cover span {
+  font-size: 30px;
+}
+
+.journal-object-cover strong {
+  margin-top: 5px;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+}
+
+.hall-side-table {
+  position: absolute;
+  right: 28px;
+  bottom: 24px;
+
+  width: 129px;
+  height: 115px;
+}
+
+.hall-table-top {
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  border: 3px solid #5c3923;
+
+  background:
+    linear-gradient(180deg, #b66f3e, #87502f);
+}
+
+.hall-table-mail,
+.hall-table-keys {
+  font-size: 19px;
+  transform: translateY(-8px);
+}
+
+.hall-table-leg {
+  position: absolute;
+  top: 25px;
+  bottom: 0;
+
+  width: 10px;
+
+  background: #75472c;
+}
+
+.hall-table-leg-left {
+  left: 15px;
+}
+
+.hall-table-leg-right {
+  right: 15px;
+}
+
+.hall-shoes {
+  position: absolute;
+  right: 170px;
+  bottom: 8px;
+
+  display: flex;
+  font-size: 27px;
+}
+
+.hall-baseboard {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 13px;
+
+  background:
+    linear-gradient(180deg, #b07845, #7d4d2e);
+}
+
+.hall-floor {
+  height: 94px;
+  position: relative;
+
+  background:
+    repeating-linear-gradient(
+      100deg,
+      #b97945 0,
+      #b97945 55px,
+      #a7653c 56px,
+      #a7653c 59px
+    );
+}
+
+.hall-rug {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 19px;
+  bottom: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 3px solid #5f513d;
+  border-radius: 45% / 22%;
+
+  background: #688250;
+
+  color: #f3e7bd;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+}
+
+.hall-whisper {
+  margin-top: 18px;
+  padding: 11px 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  border: 2px solid #b99462;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(180deg, #fff2c8, #f3daa4);
+
+  color: #654527;
+}
+
+
+/* 📕 journal */
+
+.journal-scene {
+  min-height: 500px;
+  padding: 54px 28px 50px;
+
+  border: 4px solid #5e3c27;
+  border-radius: 20px;
+
+  background:
+    linear-gradient(180deg, #72543d 0%, #4d382c 74%, #34271f 100%);
+}
+
+.journal-book {
+  width: min(760px, 94%);
+  min-height: 382px;
+  margin: 0 auto;
+
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  border: 7px solid #4f3022;
+  border-radius: 16px;
+
+  background: #553625;
+
+  box-shadow:
+    0 16px 23px rgba(24,15,11,.42);
+}
+
+.journal-book::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: calc(50% - 3px);
+
+  width: 6px;
+
+  background:
+    linear-gradient(90deg, #c6ae79, #69503b, #c6ae79);
+}
+
+.journal-page {
+  min-width: 0;
+  min-height: 368px;
+  padding: 24px 25px;
+
+  color: #5c4631;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(130,157,168,.17) 0,
+      rgba(130,157,168,.17) 1px,
+      transparent 1px,
+      transparent 27px
+    ),
+    linear-gradient(90deg, #f5e7bd, #fff4cf 45%, #efddb1);
+}
+
+.journal-date {
+  margin-bottom: 8px;
+
+  color: #967143;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.journal-page h3 {
+  margin: 0;
+
+  color: #4e6641;
+  font-size: 22px;
+}
+
+.journal-page-left > p {
+  margin: 5px 0 13px;
+
+  color: #80664a;
+  font-size: 11px;
+}
+
+.journal-writing-area {
+  width: 100%;
+  min-height: 190px;
+  padding: 10px 11px;
+
+  resize: vertical;
+
+  border: 2px solid rgba(124,92,55,.32);
+  border-radius: 8px;
+
+  outline: none;
+
+  background: rgba(255,250,224,.58);
+
+  color: #594430;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.journal-save-button {
+  margin-top: 12px;
+  padding: 9px 14px;
+
+  border: 2px solid #34563d;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(180deg, #6fa16b, #4d7954);
+
+  color: #fff8da;
+  font-weight: 900;
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 0 #34513a;
+}
+
+.journal-history-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 13px;
+
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.journal-entry-stack {
+  max-height: 305px;
+  overflow-y: auto;
+}
+
+.journal-entry {
+  margin-bottom: 11px;
+  padding: 10px 11px;
+
+  border-left: 3px solid #77915f;
+
+  background: rgba(255,250,222,.62);
+}
+
+.journal-entry p {
+  white-space: pre-wrap;
+}
+
+.journal-empty {
+  min-height: 230px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.journal-empty-doodle {
+  font-size: 45px;
+}
+
+.journal-book-ribbon {
+  position: absolute;
+  z-index: 8;
+  top: -4px;
+  right: 55px;
+
+  width: 18px;
+  height: 53px;
+
+  background:
+    linear-gradient(90deg, #713448, #a64e65, #79374e);
+
+  clip-path:
+    polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+}
+
+
+@media (max-width: 900px) {
+  .leaving-board {
+    left: 170px;
+    right: 120px;
+  }
+
+  .journal-book {
+    grid-template-columns: 1fr;
+  }
+
+  .journal-book::after {
+    display: none;
+  }
+}
+
+/* 🚪 END LIFE WALLET HOUSE MODE 003 */
