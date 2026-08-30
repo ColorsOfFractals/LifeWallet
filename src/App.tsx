@@ -13,7 +13,8 @@ type Area = {
     | "friends"
     | "appointments"
     | "work"
-    | "tasks";
+    | "tasks"
+    | "forgotten";
   icon: string;
   title: string;
   short: string;
@@ -135,6 +136,199 @@ const areas: Area[] = [
     short: "My turn.",
     accent: "blue",
   },
+  {
+    id: "forgotten",
+    icon: "❓",
+    title: "WHAT AM I FORGETTING?",
+    short: "The weird stuff.",
+    accent: "mystery",
+  },
+];
+type NicheArea = {
+  id: string;
+  icon: string;
+  title: string;
+  short: string;
+  question: string;
+  examples: string[];
+  color: string;
+};
+
+
+type NicheEntry = {
+  id: string;
+  text: string;
+  done: boolean;
+};
+const nicheAreas: NicheArea[] = [
+  {
+    id: "paperwork",
+    icon: "📬",
+    title: "PAPERWORK",
+    short: "Things asking for a response.",
+    question: "Did a piece of paper quietly create work for you?",
+    examples: [
+      "Forms to complete",
+      "Letters that need replies",
+      "Things to sign or send",
+      "Paper waiting to be filed",
+    ],
+    color: "paperwork",
+  },
+  {
+    id: "renewals",
+    icon: "🔄",
+    title: "RENEWALS",
+    short: "Future expiration bullshit.",
+    question: "What silently stops being valid later?",
+    examples: [
+      "Vehicle registration",
+      "Licenses",
+      "Memberships",
+      "Policies and annual renewals",
+    ],
+    color: "renewals",
+  },
+  {
+    id: "orders",
+    icon: "📦",
+    title: "ORDERS / RETURNS",
+    short: "Where is my shit?",
+    question: "Is money or merchandise currently in limbo?",
+    examples: [
+      "Packages arriving",
+      "Return deadlines",
+      "Refunds expected",
+      "Replacement shipments",
+    ],
+    color: "orders",
+  },
+  {
+    id: "homecare",
+    icon: "🔧",
+    title: "HOME CARE",
+    short: "The house slowly decays.",
+    question: "What around the home ages whether you remember it or not?",
+    examples: [
+      "HVAC filters",
+      "Smoke detector batteries",
+      "Repairs",
+      "Seasonal maintenance",
+    ],
+    color: "homecare",
+  },
+  {
+    id: "documents",
+    icon: "🪪",
+    title: "DOCUMENTS / IDs",
+    short: "Things governments gave you.",
+    question: "Which important document exists somewhere and eventually expires?",
+    examples: [
+      "Driver license",
+      "Passport",
+      "Birth certificate pointer",
+      "Professional credentials",
+    ],
+    color: "documents",
+  },
+  {
+    id: "insurance",
+    icon: "🛡️",
+    title: "INSURANCE",
+    short: "Hopefully boring forever.",
+    question: "If something goes sideways, do you know where the policy lives?",
+    examples: [
+      "Auto",
+      "Renters / homeowners",
+      "Health",
+      "Dental / vision",
+    ],
+    color: "insurance",
+  },
+  {
+    id: "pets",
+    icon: "🐾",
+    title: "PETS",
+    short: "Got a little dude?",
+    question: "What does the creature depend on you remembering?",
+    examples: [
+      "Vet visits",
+      "Vaccinations",
+      "Food / medication",
+      "Grooming or registration",
+    ],
+    color: "pets",
+  },
+  {
+    id: "health",
+    icon: "🩺",
+    title: "HEALTH",
+    short: "Human maintenance.",
+    question: "Is there health admin that future-you will otherwise reconstruct?",
+    examples: [
+      "Checkups",
+      "Prescription reminders",
+      "Screenings",
+      "Follow-up appointments",
+    ],
+    color: "health",
+  },
+  {
+    id: "taxes",
+    icon: "🧾",
+    title: "TAXES / RECEIPTS",
+    short: "Unfortunately.",
+    question: "What boring financial evidence should survive until tax season?",
+    examples: [
+      "Tax documents arriving",
+      "Receipts worth keeping",
+      "Deductible expenses",
+      "Things still needed to file",
+    ],
+    color: "taxes",
+  },
+  {
+    id: "dates",
+    icon: "🎂",
+    title: "IMPORTANT DATES",
+    short: "Recurring human obligations.",
+    question: "Which date would make you feel like an asshole if you forgot it?",
+    examples: [
+      "Birthdays",
+      "Anniversaries",
+      "Weddings",
+      "RSVP deadlines",
+    ],
+    color: "dates",
+  },
+  {
+    id: "travel",
+    icon: "✈️",
+    title: "TRAVEL",
+    short: "Going somewhere?",
+    question: "What needs to line up before you can physically disappear somewhere?",
+    examples: [
+      "Flights",
+      "Hotels",
+      "Reservations",
+      "Travel documents / packing",
+    ],
+    color: "travel",
+  },
+  {
+    id: "warranties",
+    icon: "🧰",
+    title: "WARRANTIES / REPAIRS",
+    short: "Who fixed this thing?",
+    question: "What expensive object has history worth remembering?",
+    examples: [
+      "Warranty expiration",
+      "Repair history",
+      "Receipt pointer",
+      "Serial / model pointer",
+    ],
+    color: "warranties",
+  },
 ];
 
 const money = (value: number) =>
@@ -147,6 +341,13 @@ const todayISO = () => new Date().toISOString().slice(0, 10);
 
 function App() {
   const [activeId, setActiveId] = useState<Area["id"]>("subscriptions");
+  const [nicheActive, setNicheActive] = useState<string | null>(null);
+
+  const [nicheEntries, setNicheEntries] =
+    useState<Record<string, NicheEntry[]>>({});
+
+  const [nicheDrafts, setNicheDrafts] =
+    useState<Record<string, string>>({});
 
   // ----------------------------------------------------------
   // 🔄 Launch sequence
@@ -1446,6 +1647,362 @@ function App() {
     );
   };
 
+
+  const renderForgotten = () => {
+    const selectedNiche =
+      nicheAreas.find((area) => area.id === nicheActive) ?? null;
+
+    const currentEntries = selectedNiche
+      ? nicheEntries[selectedNiche.id] ?? []
+      : [];
+
+    const currentDraft = selectedNiche
+      ? nicheDrafts[selectedNiche.id] ?? ""
+      : "";
+
+    const addNicheEntry = () => {
+      if (!selectedNiche || !currentDraft.trim()) return;
+
+      const entry: NicheEntry = {
+        id: `${Date.now()}-${Math.random()}`,
+        text: currentDraft.trim(),
+        done: false,
+      };
+
+      setNicheEntries((current) => ({
+        ...current,
+        [selectedNiche.id]: [
+          ...(current[selectedNiche.id] ?? []),
+          entry,
+        ],
+      }));
+
+      setNicheDrafts((current) => ({
+        ...current,
+        [selectedNiche.id]: "",
+      }));
+    };
+
+    const toggleNicheEntry = (id: string) => {
+      if (!selectedNiche) return;
+
+      setNicheEntries((current) => ({
+        ...current,
+        [selectedNiche.id]: (current[selectedNiche.id] ?? []).map(
+          (entry) =>
+            entry.id === id
+              ? { ...entry, done: !entry.done }
+              : entry
+        ),
+      }));
+    };
+
+    const removeNicheEntry = (id: string) => {
+      if (!selectedNiche) return;
+
+      setNicheEntries((current) => ({
+        ...current,
+        [selectedNiche.id]: (current[selectedNiche.id] ?? []).filter(
+          (entry) => entry.id !== id
+        ),
+      }));
+    };
+
+    // ========================================================
+    // 🧷 SELECTED NICHE = FULL ROOM
+    // ========================================================
+
+    if (selectedNiche) {
+      const remaining = currentEntries.filter(
+        (entry) => !entry.done
+      ).length;
+
+      return (
+        <div className="life-room-content forgotten-room niche-full-room">
+
+          <div className="niche-room-header">
+            <button
+              className="junk-back-button"
+              onClick={() => setNicheActive(null)}
+            >
+              ← Junk Drawer
+            </button>
+
+            <div className="niche-room-title">
+              <div className={`niche-room-big-icon niche-${selectedNiche.color}`}>
+                {selectedNiche.icon}
+              </div>
+
+              <div>
+                <small>WHAT AM I FORGETTING?</small>
+                <h3>{selectedNiche.title}</h3>
+                <p>{selectedNiche.short}</p>
+              </div>
+            </div>
+
+            <div className="niche-room-counter">
+              <strong>{remaining}</strong>
+              <span>still on my mind</span>
+            </div>
+          </div>
+
+          <div className="niche-room-question">
+            <span>💭</span>
+
+            <div>
+              <small>THINK ABOUT THIS</small>
+              <strong>{selectedNiche.question}</strong>
+            </div>
+          </div>
+
+          <div className="niche-room-columns">
+
+            <section className="niche-prompt-card">
+              <div className="niche-card-heading">
+                <span>🔎</span>
+                Stuff people commonly forget
+              </div>
+
+              <div className="niche-starter-grid">
+                {selectedNiche.examples.map((example) => (
+                  <button
+                    key={example}
+                    className="niche-starter"
+                    onClick={() =>
+                      setNicheDrafts((current) => ({
+                        ...current,
+                        [selectedNiche.id]: example,
+                      }))
+                    }
+                  >
+                    <span>＋</span>
+                    {example}
+                  </button>
+                ))}
+              </div>
+
+              <div className="starter-hint">
+                Tap one to drop it into the remembering box.
+              </div>
+            </section>
+
+            <section className="niche-memory-card">
+              <div className="niche-card-heading">
+                <span>📌</span>
+                What do I need to remember?
+              </div>
+
+              <textarea
+                className="niche-memory-input"
+                value={currentDraft}
+                onChange={(e) =>
+                  setNicheDrafts((current) => ({
+                    ...current,
+                    [selectedNiche.id]: e.target.value,
+                  }))
+                }
+                placeholder={`Anything about ${selectedNiche.title.toLowerCase()} that future-you shouldn't have to reconstruct...`}
+              />
+
+              <button
+                className="life-action-button niche-pin-button"
+                onClick={addNicheEntry}
+              >
+                📌 Pin this thought
+              </button>
+            </section>
+
+          </div>
+
+          <section className="remember-board">
+
+            <div className="remember-board-heading">
+              <div>
+                <span>🧠</span>
+                <strong>Things I'm remembering</strong>
+              </div>
+
+              <small>
+                {currentEntries.length === 0
+                  ? "Nothing here yet."
+                  : `${currentEntries.length} remembered`}
+              </small>
+            </div>
+
+            {currentEntries.length === 0 ? (
+              <div className="remember-empty">
+                <div className="remember-empty-icon">
+                  {selectedNiche.icon}
+                </div>
+
+                <div>
+                  <strong>
+                    Nothing pinned for {selectedNiche.title.toLowerCase()}.
+                  </strong>
+
+                  <p>
+                    That's allowed. This room only exists so your brain
+                    doesn't have to keep asking the question.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="remember-note-grid">
+
+                {currentEntries.map((entry, index) => (
+                  <div
+                    key={entry.id}
+                    className={`remember-note ${
+                      entry.done ? "remember-done" : ""
+                    }`}
+                    style={{
+                      transform: `rotate(${
+                        [-0.45, 0.35, -0.2, 0.5][index % 4]
+                      }deg)`,
+                    }}
+                  >
+                    <button
+                      className="remember-check"
+                      onClick={() => toggleNicheEntry(entry.id)}
+                      title={
+                        entry.done
+                          ? "Mark unfinished"
+                          : "Mark handled"
+                      }
+                    >
+                      {entry.done ? "✓" : ""}
+                    </button>
+
+                    <div className="remember-note-copy">
+                      <strong>{entry.text}</strong>
+
+                      <small>
+                        {entry.done
+                          ? "Handled."
+                          : "Future-you knows now."}
+                      </small>
+                    </div>
+
+                    <button
+                      className="remember-remove"
+                      onClick={() => removeNicheEntry(entry.id)}
+                      title="Remove"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+
+              </div>
+            )}
+
+          </section>
+
+          <div className="niche-room-footer">
+            <span>🌱</span>
+
+            <div>
+              <strong>Remembering is enough for now.</strong>
+              <small>
+                If this becomes actionable later, we can teach Life Wallet
+                where it should go next.
+              </small>
+            </div>
+          </div>
+
+        </div>
+      );
+    }
+
+    // ========================================================
+    // 🧷 NO SELECTION = THE JUNK DRAWER
+    // ========================================================
+
+    return (
+      <div className="life-room-content forgotten-room">
+
+        <div className="forgotten-heading">
+          <div className="forgotten-question">
+            ❓
+          </div>
+
+          <div>
+            <h3>What am I forgetting?</h3>
+
+            <p>
+              Probably something. That's normal. Poke around until
+              something makes your brain go “OH SHIT, THAT.”
+            </p>
+          </div>
+        </div>
+
+        <div className="junk-drawer-sign">
+          <span>🧷</span>
+          THE ADULTING JUNK DRAWER
+          <span>🧷</span>
+        </div>
+
+        <div className="niche-bulletin-board">
+
+          <div className="cork-speck cork-speck-a" />
+          <div className="cork-speck cork-speck-b" />
+          <div className="cork-speck cork-speck-c" />
+
+          <div className="niche-grid">
+
+            {nicheAreas.map((area, index) => {
+              const remembered =
+                nicheEntries[area.id]?.filter(
+                  (entry) => !entry.done
+                ).length ?? 0;
+
+              return (
+                <button
+                  key={area.id}
+                  className={`niche-button niche-${area.color}`}
+                  onClick={() => setNicheActive(area.id)}
+                  style={{
+                    transform: `rotate(${
+                      [-0.8, 0.5, -0.25, 0.9][index % 4]
+                    }deg)`,
+                  }}
+                >
+                  <span className="niche-pin">●</span>
+
+                  {remembered > 0 && (
+                    <span className="niche-memory-badge">
+                      {remembered}
+                    </span>
+                  )}
+
+                  <span className="niche-icon">
+                    {area.icon}
+                  </span>
+
+                  <strong>{area.title}</strong>
+                  <small>{area.short}</small>
+                </button>
+              );
+            })}
+
+          </div>
+        </div>
+
+        <div className="forgotten-bottom-note">
+          <span>👀</span>
+
+          <div>
+            <strong>Nothing screaming at you?</strong>
+
+            <small>
+              Excellent. Leave the junk drawer closed and go live your life.
+            </small>
+          </div>
+        </div>
+
+      </div>
+    );
+  };
   const renderRoom = () => {
     switch (activeId) {
       case "subscriptions":
@@ -1470,6 +2027,8 @@ function App() {
         return renderWork();
       case "tasks":
         return renderTasks();
+      case "forgotten":
+        return renderForgotten();
       default:
         return null;
     }
