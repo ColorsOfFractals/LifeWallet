@@ -701,3 +701,2486 @@ footer {
     font-size: 9px;
   }
 }
+
+/* ==========================================================
+   🔄 LIFE WALLET LAUNCH SEQUENCE
+   ========================================================== */
+
+.app-launching .clubhouse,
+.app-launching .top-sign,
+.app-launching footer {
+  filter: brightness(0.45) saturate(0.72);
+}
+
+.app-launching .room-button {
+  pointer-events: none;
+}
+
+.launch-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(26, 38, 24, 0.28);
+  backdrop-filter: blur(1px);
+  animation: launch-overlay-in 260ms ease-out both;
+}
+
+.launch-overlay.launch-leaving {
+  animation: launch-overlay-out 520ms ease-in both;
+}
+
+.launch-card {
+  position: relative;
+  width: min(610px, 78vw);
+  padding-top: 92px;
+  transform-origin: center bottom;
+  animation: launch-card-in 720ms cubic-bezier(.2, 1.25, .35, 1) both;
+}
+
+.launch-leaving .launch-card {
+  animation: launch-card-out 520ms cubic-bezier(.5, -.2, .85, .35) both;
+}
+
+.launch-board {
+  position: relative;
+  z-index: 2;
+  padding: 36px 46px 40px;
+  text-align: center;
+  border: 6px solid #573019;
+  border-radius: 31px 24px 34px 27px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 4%,
+      rgba(255,255,255,0.07) 4% 5%,
+      transparent 5% 33%,
+      rgba(53,26,11,0.08) 33% 34%,
+      transparent 34% 69%,
+      rgba(255,255,255,0.05) 69% 70%,
+      transparent 70%
+    ),
+    linear-gradient(#a76129, #8b4b20);
+
+  box-shadow:
+    0 9px 0 #3e2414,
+    0 22px 38px rgba(23, 18, 10, 0.5),
+    inset 0 3px 0 rgba(255,255,255,0.16);
+}
+
+.launch-board::before,
+.launch-board::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(82, 42, 18, 0.34);
+}
+
+.launch-board::before {
+  top: 31%;
+}
+
+.launch-board::after {
+  bottom: 29%;
+}
+
+.launch-copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  color: #ffe9a5;
+  text-shadow:
+    0 4px 0 #643318,
+    0 7px 10px rgba(64, 30, 13, 0.4);
+}
+
+.launch-copy strong {
+  font-size: clamp(48px, 7vw, 78px);
+  line-height: 0.95;
+  letter-spacing: -2px;
+}
+
+.launch-copy span {
+  margin: 11px 0 1px;
+  color: #75d5c1;
+  font-size: clamp(23px, 3vw, 35px);
+  font-weight: 900;
+}
+
+.launch-copy b {
+  font-size: clamp(27px, 3.5vw, 41px);
+  line-height: 1.05;
+}
+
+.launch-bolt {
+  position: absolute;
+  top: 20px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #33271d;
+  box-shadow: inset 2px 2px 1px #776352;
+}
+
+.bolt-left {
+  left: 28px;
+}
+
+.bolt-right {
+  right: 28px;
+}
+
+.launch-loading {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  width: max-content;
+  min-width: 240px;
+  margin: -7px auto 0;
+  padding: 10px 28px 12px;
+
+  color: #52301a;
+  font-size: 27px;
+  font-weight: 900;
+
+  border: 5px solid #6b451f;
+  border-radius: 17px 21px 16px 20px;
+
+  background:
+    linear-gradient(#ffe6a2, #efc96e);
+
+  box-shadow:
+    0 7px 0 #4a301b,
+    inset 0 2px 0 rgba(255,255,255,0.4);
+}
+
+.launch-spinner {
+  display: inline-block;
+  color: #3d9fb2;
+  font-size: 39px;
+  line-height: 1;
+  animation: wallet-spin 820ms linear infinite;
+}
+
+.launch-creature {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 5px;
+  width: 158px;
+  height: 124px;
+  transform: translateX(-50%);
+  border: 5px solid #245951;
+  border-bottom: 0;
+  border-radius: 48% 52% 27% 30% / 61% 61% 24% 25%;
+  background:
+    radial-gradient(circle at 33% 25%, rgba(255,255,255,0.18), transparent 24%),
+    #54b3a4;
+
+  box-shadow:
+    inset 0 4px 0 rgba(255,255,255,0.15),
+    0 5px 0 rgba(49, 44, 23, 0.35);
+
+  animation: creature-peek 900ms cubic-bezier(.2,1.35,.3,1) both;
+}
+
+.launch-eye {
+  position: absolute;
+  top: 47px;
+  width: 43px;
+  height: 51px;
+  overflow: hidden;
+  border: 4px solid #314d39;
+  border-radius: 50%;
+  background: #fff8cf;
+}
+
+.launch-eye > span {
+  position: absolute;
+  left: 13px;
+  top: 17px;
+  width: 16px;
+  height: 21px;
+  border-radius: 50%;
+  background: #47331c;
+  box-shadow: inset 4px 3px 0 #82683a;
+}
+
+.launch-eye > span::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 5px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
+}
+
+.launch-eye-left {
+  left: 31px;
+  transform: rotate(-3deg);
+}
+
+.launch-eye-right {
+  right: 31px;
+  transform: rotate(3deg);
+}
+
+.launch-leaf {
+  position: absolute;
+  top: -32px;
+  width: 50px;
+  height: 72px;
+  border: 5px solid #34682d;
+  border-radius: 80% 18% 75% 22%;
+  background:
+    linear-gradient(135deg, #86c93f, #5a9e31);
+}
+
+.launch-leaf::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 7px;
+  width: 4px;
+  height: 50px;
+  border-radius: 999px;
+  background: rgba(49,102,43,0.6);
+  transform: rotate(-33deg);
+}
+
+.leaf-left {
+  left: 18px;
+  transform: rotate(-37deg);
+}
+
+.leaf-right {
+  right: 18px;
+  transform: scaleX(-1) rotate(-37deg);
+}
+
+.launch-hand {
+  position: absolute;
+  bottom: -13px;
+  width: 49px;
+  height: 35px;
+  z-index: 5;
+  border: 5px solid #245951;
+  border-radius: 44% 44% 51% 51%;
+  background: #5ebbad;
+}
+
+.launch-hand::before,
+.launch-hand::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  width: 4px;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(34, 88, 79, 0.5);
+}
+
+.launch-hand::before {
+  left: 13px;
+}
+
+.launch-hand::after {
+  right: 13px;
+}
+
+.launch-hand-left {
+  left: -11px;
+  transform: rotate(6deg);
+}
+
+.launch-hand-right {
+  right: -11px;
+  transform: rotate(-6deg);
+}
+
+.launch-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(244, 223, 103, 0.2);
+  filter: blur(12px);
+  animation: glow-breathe 1.4s ease-in-out infinite alternate;
+}
+
+.launch-glow-a {
+  width: 330px;
+  height: 330px;
+}
+
+.launch-glow-b {
+  width: 520px;
+  height: 180px;
+}
+
+@keyframes wallet-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes launch-overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes launch-overlay-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes launch-card-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.88) rotate(-2deg);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translateY(10px) scale(1.025) rotate(0.7deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes launch-card-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-70px) scale(0.94);
+  }
+}
+
+@keyframes creature-peek {
+  0% {
+    transform: translateX(-50%) translateY(72px) scale(0.8);
+  }
+
+  70% {
+    transform: translateX(-50%) translateY(-6px) scale(1.04);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes glow-breathe {
+  from {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-overlay,
+  .launch-card,
+  .launch-creature,
+  .launch-spinner,
+  .launch-glow {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+/* ==========================================================
+   🍬 LIFE WALLET RICHNESS PASS
+   Dense layered lighting, candy depth, soft materials
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   🌤️ GLOBAL WORLD LIGHTING
+   ---------------------------------------------------------- */
+
+.app {
+  background:
+    radial-gradient(
+      circle at 77% 10%,
+      rgba(255, 248, 185, 0.98) 0,
+      rgba(255, 238, 132, 0.38) 10%,
+      transparent 25%
+    ),
+    radial-gradient(
+      ellipse at 50% 108%,
+      rgba(68, 130, 52, 0.75),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #82d9f5 0%,
+      #6fc9ec 34%,
+      #a7df72 35%,
+      #78b84f 68%,
+      #477e39 100%
+    );
+}
+
+.app::before {
+  opacity: 0.16;
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.38) 0 1px,
+      transparent 1.2px
+    ),
+    radial-gradient(
+      circle,
+      rgba(71, 42, 23, 0.26) 0 0.7px,
+      transparent 0.9px
+    );
+  background-size:
+    16px 16px,
+    11px 11px;
+  background-position:
+    0 0,
+    5px 7px;
+}
+
+
+/* ----------------------------------------------------------
+   🪵 LIFE WALLET HEADER SIGN
+   ---------------------------------------------------------- */
+
+.top-sign {
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% -20%,
+      rgba(255, 211, 132, 0.32),
+      transparent 52%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0 8%,
+      rgba(255,255,255,0.07) 8% 9%,
+      transparent 9% 29%,
+      rgba(69,30,13,0.12) 29% 30%,
+      transparent 30% 55%,
+      rgba(255,255,255,0.05) 55% 56%,
+      transparent 56%
+    ),
+    repeating-linear-gradient(
+      3deg,
+      rgba(72,31,11,0.12) 0 2px,
+      transparent 2px 12px
+    ),
+    linear-gradient(
+      180deg,
+      #b16c31 0%,
+      #985523 48%,
+      #7e421c 100%
+    );
+
+  box-shadow:
+    0 3px 0 #c27c3c inset,
+    0 -5px 0 rgba(73, 32, 13, 0.34) inset,
+    0 8px 0 #412313,
+    0 15px 26px rgba(48,31,17,0.38),
+    0 0 26px rgba(255,220,121,0.13);
+}
+
+.top-sign::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  left: 7%;
+  right: 7%;
+  top: 8%;
+  height: 27%;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.16),
+      rgba(255,255,255,0)
+    );
+  opacity: 0.72;
+}
+
+.top-sign h1 {
+  color: #fff0bd;
+
+  text-shadow:
+    0 1px 0 #fff8d8,
+    0 3px 0 #7b3d19,
+    0 5px 0 #5e2e16,
+    0 8px 11px rgba(47, 22, 8, 0.42);
+}
+
+
+/* ----------------------------------------------------------
+   🪵 LARGE CLUBHOUSE PANELS
+   ---------------------------------------------------------- */
+
+.control-panel,
+.world {
+  border-color: #61381d;
+
+  box-shadow:
+    0 2px 0 rgba(255, 205, 121, 0.52) inset,
+    0 -5px 0 rgba(65, 31, 13, 0.25) inset,
+    0 9px 0 #382216,
+    0 16px 30px rgba(42,28,16,0.34);
+}
+
+.control-panel {
+  background:
+    radial-gradient(
+      circle at 35% 5%,
+      rgba(255,211,139,0.28),
+      transparent 32%
+    ),
+    repeating-linear-gradient(
+      2deg,
+      rgba(91,43,18,0.10) 0 2px,
+      transparent 2px 13px
+    ),
+    linear-gradient(
+      100deg,
+      #cf8947 0%,
+      #b96d35 48%,
+      #9d5629 100%
+    );
+
+  box-shadow:
+    0 3px 0 rgba(255, 215, 142, 0.4) inset,
+    -6px 0 14px rgba(75, 37, 17, 0.13) inset,
+    0 9px 0 #382216,
+    0 16px 30px rgba(42,28,16,0.34);
+}
+
+.panel-title {
+  color: #4d2f19;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(255,255,255,0.42),
+      transparent 62%
+    ),
+    linear-gradient(
+      #f1ca82,
+      #dba75c
+    );
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.45) inset,
+    0 -4px 0 rgba(140,83,33,0.18) inset,
+    0 5px 0 #704523,
+    0 8px 10px rgba(73,41,21,0.24);
+}
+
+
+/* ----------------------------------------------------------
+   🍭 CONTROL PANEL BUTTONS
+   ---------------------------------------------------------- */
+
+.room-button {
+  isolation: isolate;
+  overflow: hidden;
+
+  border-color: rgba(69, 40, 23, 0.82);
+
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.24) inset,
+    0 -6px 0 rgba(44,25,17,0.18) inset,
+    0 7px 0 rgba(67,40,24,0.82),
+    0 10px 15px rgba(62,35,18,0.23);
+
+  transition:
+    transform 150ms cubic-bezier(.2,1.5,.4,1),
+    box-shadow 150ms ease,
+    filter 150ms ease;
+}
+
+.room-button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  left: 8%;
+  right: 8%;
+  top: 5%;
+  height: 36%;
+
+  border-radius: 999px 999px 45% 45%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.34),
+      rgba(255,255,255,0.08) 60%,
+      transparent
+    );
+
+  opacity: 0.72;
+}
+
+.room-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 23% 17%,
+      rgba(255,255,255,0.20),
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 65% 105%,
+      rgba(35,17,10,0.25),
+      transparent 55%
+    );
+
+  mix-blend-mode: soft-light;
+}
+
+.room-button:hover {
+  transform:
+    translateY(-4px)
+    scale(1.025)
+    rotate(0.5deg);
+
+  filter:
+    brightness(1.09)
+    saturate(1.08);
+
+  box-shadow:
+    0 4px 0 rgba(255,255,255,0.28) inset,
+    0 -6px 0 rgba(44,25,17,0.17) inset,
+    0 9px 0 rgba(67,40,24,0.82),
+    0 14px 19px rgba(62,35,18,0.30);
+}
+
+.room-button:active {
+  transform:
+    translateY(4px)
+    scale(0.985);
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.18) inset,
+    0 -3px 0 rgba(44,25,17,0.18) inset,
+    0 2px 0 rgba(67,40,24,0.82);
+}
+
+.room-button.selected {
+  outline: 4px solid #fff0a1;
+
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.34) inset,
+    0 -6px 0 rgba(44,25,17,0.17) inset,
+    0 7px 0 rgba(67,40,24,0.82),
+    0 10px 18px rgba(62,35,18,0.3),
+    0 0 20px rgba(255,231,126,0.50);
+}
+
+.room-icon {
+  transform: translateZ(0);
+
+  filter:
+    drop-shadow(0 2px 0 rgba(255,255,255,0.22))
+    drop-shadow(0 4px 2px rgba(45,23,14,0.32));
+}
+
+.room-button strong {
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.25),
+    0 2px 1px rgba(42,21,12,0.3);
+}
+
+
+/* ----------------------------------------------------------
+   🌄 LANDSCAPE DEPTH
+   ---------------------------------------------------------- */
+
+.landscape {
+  background:
+    radial-gradient(
+      circle at 78% 4%,
+      rgba(255,246,177,0.52),
+      transparent 23%
+    ),
+    linear-gradient(
+      #7ed3f0 0 65%,
+      #a9dd78 65% 100%
+    );
+
+  box-shadow:
+    inset 0 -16px 26px rgba(65,112,49,0.16);
+}
+
+.hill-back {
+  background:
+    radial-gradient(
+      ellipse at 42% 15%,
+      rgba(177,225,108,0.34),
+      transparent 45%
+    ),
+    #79be51;
+}
+
+.hill-front {
+  background:
+    radial-gradient(
+      ellipse at 45% 8%,
+      rgba(164,215,105,0.28),
+      transparent 40%
+    ),
+    linear-gradient(
+      #64a74a,
+      #4b8b3e
+    );
+}
+
+
+/* ----------------------------------------------------------
+   📜 ACTIVE ROOM / PAPER
+   ---------------------------------------------------------- */
+
+.room-stage {
+  background:
+    repeating-linear-gradient(
+      1deg,
+      rgba(86,40,16,0.08) 0 2px,
+      transparent 2px 15px
+    ),
+    linear-gradient(
+      #bb773e,
+      #9b592e
+    );
+
+  box-shadow:
+    0 4px 0 rgba(238,159,86,0.25) inset,
+    0 -7px 0 rgba(75,34,15,0.2) inset,
+    0 9px 0 rgba(78,46,25,0.72),
+    0 17px 27px rgba(59,42,22,0.28);
+}
+
+.stage-tab {
+  overflow: hidden;
+
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.22) inset,
+    0 -4px 0 rgba(46,24,16,0.16) inset,
+    0 5px 0 #573a24,
+    0 9px 15px rgba(55,29,16,0.25);
+}
+
+.stage-tab::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 5px;
+  height: 30%;
+  pointer-events: none;
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.25),
+      transparent
+    );
+}
+
+.paper {
+  background:
+    radial-gradient(
+      ellipse at 45% -10%,
+      rgba(255,255,255,0.72),
+      transparent 48%
+    ),
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(157,109,49,0.08),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 89% 80%,
+      rgba(137,86,37,0.08),
+      transparent 30%
+    ),
+    repeating-linear-gradient(
+      87deg,
+      rgba(119,77,34,0.025) 0 1px,
+      transparent 1px 12px
+    ),
+    #f4dda8;
+
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.66) inset,
+    0 -8px 19px rgba(135,84,35,0.12) inset,
+    inset 0 0 35px rgba(151,104,49,0.13),
+    0 6px 9px rgba(66,38,20,0.18);
+}
+
+
+/* ----------------------------------------------------------
+   🌱 PERMANENT LITTLE CLUBHOUSE CREATURE
+   ---------------------------------------------------------- */
+
+.tiny-creature {
+  background:
+    radial-gradient(
+      circle at 31% 18%,
+      rgba(255,255,255,0.38),
+      transparent 24%
+    ),
+    radial-gradient(
+      ellipse at 50% 115%,
+      rgba(20,82,78,0.34),
+      transparent 56%
+    ),
+    linear-gradient(
+      #70cabd,
+      #48a99f
+    );
+
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.18) inset,
+    0 -4px 0 rgba(19,78,74,0.18) inset,
+    0 4px 0 #3c2d1d,
+    0 7px 8px rgba(49,32,19,0.25);
+}
+
+
+/* ==========================================================
+   🔄 LAUNCH SCREEN — HIGH DEPTH
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   🌟 AMBIENT EXPOSURE
+   ---------------------------------------------------------- */
+
+.launch-overlay {
+  background:
+    radial-gradient(
+      ellipse at 50% 47%,
+      rgba(238, 219, 110, 0.18) 0%,
+      rgba(54, 74, 40, 0.13) 33%,
+      rgba(17, 26, 18, 0.48) 100%
+    );
+
+  backdrop-filter:
+    blur(2px)
+    saturate(0.8);
+}
+
+.launch-overlay::before {
+  content: "";
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  left: 50%;
+  top: 45%;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  background:
+    repeating-conic-gradient(
+      from -10deg,
+      rgba(255,226,101,0.00) 0deg 8deg,
+      rgba(255,226,101,0.10) 9deg 14deg,
+      rgba(255,226,101,0.00) 15deg 28deg
+    );
+
+  border-radius: 50%;
+  opacity: 0.72;
+
+  mask-image:
+    radial-gradient(
+      circle,
+      black 0%,
+      rgba(0,0,0,0.72) 33%,
+      transparent 70%
+    );
+}
+
+.launch-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 38% 28%, #ffe26f 0 3px, transparent 4px),
+    radial-gradient(circle at 59% 23%, #ffe993 0 4px, transparent 5px),
+    radial-gradient(circle at 67% 37%, #ffd95c 0 2px, transparent 3px),
+    radial-gradient(circle at 31% 42%, #fff2a7 0 3px, transparent 4px),
+    radial-gradient(circle at 55% 36%, #ffe36a 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 27%, #fff1a0 0 2px, transparent 3px);
+
+  filter:
+    drop-shadow(0 0 7px rgba(255,223,94,0.92));
+
+  animation:
+    wallet-fireflies 1.7s ease-in-out infinite alternate;
+}
+
+
+/* ----------------------------------------------------------
+   🪵 LAUNCH BOARD MATERIAL
+   ---------------------------------------------------------- */
+
+.launch-board {
+  overflow: visible;
+
+  border-color: #593016;
+
+  background:
+    radial-gradient(
+      ellipse at 47% -15%,
+      rgba(255,201,103,0.28),
+      transparent 52%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(70,29,10,0.14),
+      transparent 12%,
+      rgba(255,255,255,0.07) 22%,
+      transparent 34%,
+      rgba(74,30,10,0.11) 52%,
+      transparent 67%,
+      rgba(255,255,255,0.06) 81%,
+      transparent
+    ),
+    repeating-linear-gradient(
+      2deg,
+      rgba(80,31,10,0.14) 0 2px,
+      transparent 2px 13px
+    ),
+    repeating-linear-gradient(
+      91deg,
+      rgba(64,26,9,0.05) 0 1px,
+      transparent 1px 42px
+    ),
+    linear-gradient(
+      180deg,
+      #c27636 0%,
+      #aa5f29 32%,
+      #955022 72%,
+      #80401a 100%
+    );
+
+  box-shadow:
+    0 4px 0 rgba(242,161,82,0.58) inset,
+    0 -8px 0 rgba(70,27,11,0.28) inset,
+    0 10px 0 #3c2111,
+    0 19px 0 rgba(50,25,12,0.23),
+    0 31px 45px rgba(20,14,8,0.52),
+    0 0 46px rgba(255,215,82,0.14);
+}
+
+.launch-board::before {
+  left: 21px;
+  right: 21px;
+  top: 30%;
+
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(66,26,9,0.18),
+      rgba(83,31,10,0.42),
+      rgba(66,26,9,0.18)
+    );
+
+  box-shadow:
+    0 1px 0 rgba(255,189,96,0.13);
+}
+
+.launch-board::after {
+  left: 21px;
+  right: 21px;
+  bottom: 29%;
+
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(66,26,9,0.16),
+      rgba(83,31,10,0.38),
+      rgba(66,26,9,0.16)
+    );
+
+  box-shadow:
+    0 1px 0 rgba(255,189,96,0.12);
+}
+
+
+/* ----------------------------------------------------------
+   ✨ LAUNCH TYPOGRAPHY
+   ---------------------------------------------------------- */
+
+.launch-copy strong {
+  color: #ffe5a0;
+
+  text-shadow:
+    0 1px 0 #fff6ca,
+    0 3px 0 #dba852,
+    0 6px 0 #7a3b17,
+    0 9px 0 #55280f,
+    0 13px 15px rgba(49,21,8,0.54);
+}
+
+.launch-copy span {
+  color: #72dcc5;
+
+  text-shadow:
+    0 1px 0 rgba(210,255,242,0.65),
+    0 3px 0 #337f73,
+    0 5px 0 #205d56,
+    0 8px 10px rgba(35,24,14,0.42);
+}
+
+.launch-copy b {
+  color: #ffedae;
+
+  text-shadow:
+    0 1px 0 #fffbd1,
+    0 3px 0 #c68b3d,
+    0 5px 0 #703516,
+    0 8px 10px rgba(45,21,9,0.5);
+}
+
+
+/* ----------------------------------------------------------
+   🌱 CREATURE — ROUNDNESS / LIGHT / FUZZ
+   ---------------------------------------------------------- */
+
+.launch-creature {
+  width: 168px;
+  height: 132px;
+
+  border-color: #245c53;
+
+  background:
+    radial-gradient(
+      ellipse at 34% 17%,
+      rgba(255,255,255,0.58) 0%,
+      rgba(255,255,255,0.12) 18%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 70% 29%,
+      rgba(255,255,255,0.17),
+      transparent 23%
+    ),
+    radial-gradient(
+      ellipse at 50% 116%,
+      rgba(17,76,70,0.54),
+      transparent 58%
+    ),
+    linear-gradient(
+      135deg,
+      #7ad2c1 0%,
+      #55b8aa 47%,
+      #3c968f 100%
+    );
+
+  box-shadow:
+    0 4px 0 rgba(211,255,244,0.24) inset,
+    0 -8px 13px rgba(23,86,80,0.22) inset,
+    0 0 0 2px rgba(91,186,167,0.30),
+    0 7px 0 rgba(42,87,75,0.34),
+    0 13px 17px rgba(30,24,15,0.34),
+    0 0 30px rgba(126,237,208,0.14);
+}
+
+.launch-creature::before {
+  content: "";
+  position: absolute;
+
+  left: 22px;
+  top: 15px;
+
+  width: 55px;
+  height: 27px;
+
+  border-radius: 50%;
+
+  transform: rotate(-18deg);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(223,255,247,0.45),
+      transparent 70%
+    );
+
+  filter: blur(1px);
+}
+
+.launch-creature::after {
+  content: "";
+  position: absolute;
+
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+
+  height: 37px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(20,83,77,0.20),
+      transparent 70%
+    );
+}
+
+
+/* ----------------------------------------------------------
+   👀 EYES — GLASS / DEPTH
+   ---------------------------------------------------------- */
+
+.launch-eye {
+  border-color: #324f3b;
+
+  background:
+    radial-gradient(
+      circle at 38% 25%,
+      #ffffff 0 8%,
+      #fff8d3 22%,
+      #f3e7ac 76%,
+      #d6c584 100%
+    );
+
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.68) inset,
+    0 -5px 7px rgba(102,83,42,0.14) inset,
+    0 4px 6px rgba(29,49,35,0.24);
+}
+
+.launch-eye > span {
+  background:
+    radial-gradient(
+      circle at 42% 28%,
+      #a67a39 0 18%,
+      #5d3d1d 35%,
+      #2f2013 76%
+    );
+
+  box-shadow:
+    inset 3px 3px 0 rgba(193,147,76,0.32),
+    0 1px 2px rgba(35,20,9,0.28);
+}
+
+.launch-eye > span::after {
+  width: 6px;
+  height: 8px;
+
+  background: #fff;
+
+  box-shadow:
+    8px 10px 0 -2px rgba(255,255,255,0.75);
+}
+
+
+/* ----------------------------------------------------------
+   🍃 CREATURE LEAVES
+   ---------------------------------------------------------- */
+
+.launch-leaf {
+  border-color: #356b2d;
+
+  background:
+    radial-gradient(
+      ellipse at 32% 22%,
+      rgba(255,255,205,0.52),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #a6dc48 0%,
+      #79bf39 45%,
+      #4d902d 100%
+    );
+
+  box-shadow:
+    0 3px 0 rgba(233,255,168,0.32) inset,
+    0 -5px 8px rgba(42,104,39,0.22) inset,
+    0 5px 6px rgba(34,55,25,0.24);
+}
+
+.launch-leaf::after {
+  background:
+    linear-gradient(
+      rgba(48,109,43,0.74),
+      rgba(45,91,37,0.42)
+    );
+
+  box-shadow:
+    -10px 14px 0 -1px rgba(52,108,40,0.32),
+    8px 26px 0 -1px rgba(52,108,40,0.25);
+}
+
+
+/* ----------------------------------------------------------
+   🤲 CREATURE HANDS
+   ---------------------------------------------------------- */
+
+.launch-hand {
+  background:
+    radial-gradient(
+      ellipse at 40% 15%,
+      rgba(255,255,255,0.38),
+      transparent 34%
+    ),
+    linear-gradient(
+      #73cabb,
+      #48a89c
+    );
+
+  box-shadow:
+    0 3px 0 rgba(225,255,247,0.24) inset,
+    0 -4px 6px rgba(20,82,75,0.18) inset,
+    0 5px 6px rgba(34,42,27,0.28);
+}
+
+
+/* ----------------------------------------------------------
+   📜 LOADING PLAQUE
+   ---------------------------------------------------------- */
+
+.launch-loading {
+  color: #4b2914;
+
+  border-color: #67401c;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0,
+      rgba(255,255,255,0.72),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 50% 110%,
+      rgba(183,117,39,0.19),
+      transparent 50%
+    ),
+    linear-gradient(
+      #ffe9a6,
+      #f1cb72
+    );
+
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.67) inset,
+    0 -5px 0 rgba(161,100,31,0.16) inset,
+    0 7px 0 #493019,
+    0 12px 17px rgba(40,24,12,0.38),
+    0 0 20px rgba(255,221,112,0.17);
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.44);
+}
+
+.launch-spinner {
+  color: #35a7bf;
+
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,0.72))
+    drop-shadow(0 3px 2px rgba(44,81,80,0.20));
+}
+
+
+/* ----------------------------------------------------------
+   ✨ EXTRA LIGHT MOTION
+   ---------------------------------------------------------- */
+
+.launch-glow-a {
+  width: 390px;
+  height: 390px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,234,115,0.36),
+      rgba(255,212,70,0.09) 42%,
+      transparent 70%
+    );
+}
+
+.launch-glow-b {
+  width: 610px;
+  height: 210px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,221,91,0.23),
+      transparent 68%
+    );
+}
+
+
+/* ----------------------------------------------------------
+   🧚 MICRO MOTION
+   ---------------------------------------------------------- */
+
+@keyframes wallet-fireflies {
+  from {
+    opacity: 0.48;
+    transform: translateY(1px) scale(0.98);
+  }
+
+  to {
+    opacity: 0.95;
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+
+/* 🍬 END LIFE WALLET RICHNESS PASS */
+
+
+/* ==========================================================
+   🐾 LIFE WALLET CREATURE — FUR PASS
+   ========================================================== */
+
+.launch-creature {
+  /* softer organic body instead of perfect rubber */
+  border-radius:
+    46% 54% 31% 35%
+    / 58% 60% 29% 31%;
+
+  /* tiny furry halo around the silhouette */
+  filter:
+    drop-shadow(-2px -1px 0 rgba(68, 153, 139, 0.75))
+    drop-shadow( 2px -1px 0 rgba(68, 153, 139, 0.65))
+    drop-shadow(-3px  2px 1px rgba(42, 119, 109, 0.32))
+    drop-shadow( 3px  2px 1px rgba(42, 119, 109, 0.28))
+    drop-shadow( 0px  7px 5px rgba(31, 28, 18, 0.30));
+}
+
+/* forehead fluff */
+.launch-creature::before {
+  content: "";
+  position: absolute;
+
+  left: 50%;
+  top: -15px;
+
+  width: 72px;
+  height: 39px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      145deg,
+      transparent 0 11%,
+      #68c7b6 12% 30%,
+      transparent 31% 36%,
+      #58b8aa 37% 56%,
+      transparent 57% 62%,
+      #6acbbb 63% 81%,
+      transparent 82%
+    );
+
+  clip-path: polygon(
+    0% 100%,
+    10% 42%,
+    25% 69%,
+    35% 5%,
+    48% 61%,
+    62% 0%,
+    72% 65%,
+    91% 32%,
+    100% 100%
+  );
+
+  filter:
+    drop-shadow(0 -2px 0 rgba(171, 238, 221, 0.18));
+
+  opacity: 1;
+}
+
+/* soft lower-face depth */
+.launch-creature::after {
+  content: "";
+  position: absolute;
+
+  left: 9px;
+  right: 9px;
+  bottom: 3px;
+
+  height: 43px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(20, 83, 77, 0.24),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+/* little cheek fluff — use the eyes' outer shadows */
+.launch-eye-left {
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.68) inset,
+    0 -5px 7px rgba(102,83,42,0.14) inset,
+    0 4px 6px rgba(29,49,35,0.24),
+    -12px 15px 0 -8px #58b8aa,
+    -16px 21px 0 -11px #4da99d;
+}
+
+.launch-eye-right {
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.68) inset,
+    0 -5px 7px rgba(102,83,42,0.14) inset,
+    0 4px 6px rgba(29,49,35,0.24),
+    12px 15px 0 -8px #58b8aa,
+    16px 21px 0 -11px #4da99d;
+}
+
+/* hands get a little softer too */
+.launch-hand {
+  border-radius:
+    48% 52% 46% 54%
+    / 42% 43% 58% 60%;
+
+  filter:
+    drop-shadow(-1px 0 0 rgba(92, 190, 174, 0.45))
+    drop-shadow(1px 0 0 rgba(43, 128, 116, 0.35));
+}
+
+/* leaves stay crisp so fur doesn't muddy his silhouette */
+.launch-leaf {
+  filter:
+    drop-shadow(0 4px 3px rgba(32, 62, 26, 0.27));
+}
+
+/* 🐾 END CREATURE FUR PASS */
+
+
+/* ==========================================================
+   🐾 CREATURE ANTI-WRINKLE REPAIR
+   ========================================================== */
+
+/*
+   Kill the polygon forehead spikes from the first fur pass.
+   Replace them with a soft scalloped tuft sitting behind
+   the top of his head.
+*/
+
+.launch-creature::before {
+  content: "";
+  position: absolute;
+
+  z-index: -1;
+
+  left: 50%;
+  top: -17px;
+
+  width: 82px;
+  height: 42px;
+
+  transform: translateX(-50%);
+
+  clip-path: none;
+
+  border-radius:
+    46% 54% 42% 58%
+    / 65% 65% 35% 35%;
+
+  background:
+    radial-gradient(
+      circle at 18% 67%,
+      #64c3b4 0 17px,
+      transparent 18px
+    ),
+    radial-gradient(
+      circle at 39% 42%,
+      #71cdbc 0 18px,
+      transparent 19px
+    ),
+    radial-gradient(
+      circle at 61% 38%,
+      #69c7b6 0 19px,
+      transparent 20px
+    ),
+    radial-gradient(
+      circle at 82% 67%,
+      #58b8aa 0 17px,
+      transparent 18px
+    );
+
+  filter:
+    drop-shadow(0 -2px 0 rgba(182, 244, 228, 0.16))
+    drop-shadow(0 2px 1px rgba(27, 104, 94, 0.18));
+
+  opacity: 1;
+
+  pointer-events: none;
+}
+
+
+/* Restore clean glassy eyes — no accidental cheek wrinkles. */
+
+.launch-eye-left,
+.launch-eye-right {
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.68) inset,
+    0 -5px 7px rgba(102,83,42,0.14) inset,
+    0 4px 6px rgba(29,49,35,0.24);
+}
+
+
+/*
+   Soft fuzzy rim.
+   Very restrained — enough to break the perfect vector edge
+   without turning him into a porcupine.
+*/
+
+.launch-creature {
+  filter:
+    drop-shadow(-1px -1px 0 rgba(106, 204, 187, 0.45))
+    drop-shadow( 1px -1px 0 rgba(106, 204, 187, 0.38))
+    drop-shadow(-2px  1px 1px rgba(42, 126, 114, 0.20))
+    drop-shadow( 2px  1px 1px rgba(42, 126, 114, 0.18))
+    drop-shadow( 0px  8px 5px rgba(31, 28, 18, 0.28));
+}
+
+
+/* 🐾 END CREATURE ANTI-WRINKLE REPAIR */
+
+
+/* ==========================================================
+   🏡 LIFE BOARD 002
+   Functional cartoon life-management rooms
+   ========================================================== */
+
+.life-board-grid .room-button {
+  min-height: 94px;
+}
+
+.life-board-grid .room-button strong {
+  font-size: 11px;
+}
+
+.life-board-grid .room-button small {
+  font-size: 9px;
+}
+
+.life-panel-paper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 26px 30px;
+}
+
+.life-panel-paper::-webkit-scrollbar {
+  width: 12px;
+}
+
+.life-panel-paper::-webkit-scrollbar-track {
+  background: rgba(103, 67, 30, 0.12);
+  border-radius: 999px;
+}
+
+.life-panel-paper::-webkit-scrollbar-thumb {
+  background: #b98748;
+  border: 3px solid #efd59b;
+  border-radius: 999px;
+}
+
+.life-room-content {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.life-room-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 10px 4px 14px;
+  border-bottom: 3px dashed rgba(132, 87, 39, 0.28);
+}
+
+.life-room-heading-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 58px;
+  height: 58px;
+  font-size: 32px;
+  border: 3px solid #8a6031;
+  border-radius: 20px 16px 22px 18px;
+  background:
+    radial-gradient(circle at 35% 20%, rgba(255,255,255,.72), transparent 35%),
+    linear-gradient(#ffe4a4, #e8bd6c);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.52) inset,
+    0 5px 0 #76502b,
+    0 9px 13px rgba(77, 46, 22, .16);
+}
+
+.life-room-heading h3 {
+  margin: 0;
+  color: #55351e;
+  font-size: clamp(20px, 2.4vw, 29px);
+  line-height: 1.1;
+}
+
+.life-room-heading p {
+  margin: 5px 0 0;
+  color: #81613e;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.life-stat-row {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: 13px;
+  margin-bottom: 16px;
+}
+
+.life-stat-card {
+  position: relative;
+  overflow: hidden;
+  padding: 17px;
+  border: 3px solid #a77439;
+  border-radius: 22px 18px 25px 19px;
+  background:
+    radial-gradient(circle at 20% 0, rgba(255,255,255,.62), transparent 45%),
+    linear-gradient(#f7dfa3, #e6bc6b);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.58) inset,
+    0 -5px 0 rgba(136, 83, 28, .12) inset,
+    0 5px 0 #886137,
+    0 9px 13px rgba(77, 46, 22, .17);
+}
+
+.life-stat-card.hero-stat {
+  background:
+    radial-gradient(circle at 20% 0, rgba(255,255,255,.38), transparent 42%),
+    linear-gradient(135deg, #72c9ba, #429e96);
+  border-color: #326f6c;
+  color: #fff8dd;
+}
+
+.life-stat-card > span,
+.life-stat-card > strong,
+.life-stat-card > small {
+  display: block;
+}
+
+.life-stat-card > span {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  opacity: .8;
+}
+
+.life-stat-card > strong {
+  margin-top: 4px;
+  font-size: clamp(23px, 3vw, 34px);
+  line-height: 1;
+}
+
+.life-stat-card > small {
+  margin-top: 5px;
+  font-size: 11px;
+  opacity: .75;
+}
+
+.life-split {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 15px;
+  margin-bottom: 16px;
+}
+
+.life-card,
+.life-list-card {
+  padding: 17px;
+  border: 3px solid #ad7c43;
+  border-radius: 21px 17px 25px 19px;
+  background:
+    radial-gradient(circle at 18% 0, rgba(255,255,255,.58), transparent 43%),
+    rgba(255, 238, 197, .76);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.58) inset,
+    0 5px 0 rgba(118, 79, 39, .48),
+    0 9px 14px rgba(82, 49, 24, .12);
+}
+
+.life-list-card {
+  margin-top: 15px;
+}
+
+.life-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 13px;
+  color: #62401f;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.life-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+}
+
+.life-form-grid.four {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.life-form-grid .span-2 {
+  grid-column: span 2;
+}
+
+.life-card label,
+.life-room-content label {
+  display: block;
+  color: #77542e;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.life-card label > span,
+.life-room-content label > span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.life-room-content input:not([type="checkbox"]),
+.life-room-content select,
+.life-textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 11px;
+  color: #4d351f;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  border: 3px solid #b6864d;
+  border-radius: 13px 11px 15px 12px;
+  background:
+    linear-gradient(rgba(255,255,255,.38), transparent 34%),
+    #fff2ce;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.8) inset,
+    0 3px 0 rgba(125, 83, 40, .16);
+}
+
+.life-room-content input:focus,
+.life-room-content select:focus,
+.life-textarea:focus {
+  border-color: #4b9d94;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.8) inset,
+    0 0 0 3px rgba(70, 166, 153, .18);
+}
+
+.life-textarea {
+  min-height: 115px;
+  resize: vertical;
+}
+
+.life-textarea.compact {
+  min-height: 82px;
+}
+
+.life-action-button,
+.small-life-button {
+  cursor: pointer;
+  margin-top: 13px;
+  padding: 10px 17px;
+  color: #fff8df;
+  font-weight: 900;
+  border: 3px solid #306d68;
+  border-radius: 15px 13px 17px 14px;
+  background:
+    radial-gradient(circle at 30% 0, rgba(255,255,255,.35), transparent 38%),
+    linear-gradient(#61c2b4, #3c978f);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.24) inset,
+    0 -4px 0 rgba(23, 91, 85, .22) inset,
+    0 5px 0 #285b58,
+    0 8px 9px rgba(53, 39, 23, .18);
+  transition: transform 110ms ease, box-shadow 110ms ease;
+}
+
+.life-action-button:hover,
+.small-life-button:hover {
+  transform: translateY(-2px);
+}
+
+.life-action-button:active,
+.small-life-button:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 2px 0 #285b58,
+    0 3px 4px rgba(53, 39, 23, .12);
+}
+
+.small-life-button {
+  width: 100%;
+  margin-top: 9px;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+.life-toggle-row {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+.life-toggle-row input {
+  width: 19px;
+  height: 19px;
+  accent-color: #4ca89e;
+}
+
+.life-toggle-row span {
+  margin: 0 !important;
+  font-size: 12px;
+}
+
+.soft-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 12px;
+  padding: 11px 12px;
+  border: 2px dashed #ba8b50;
+  border-radius: 14px;
+  background: rgba(255, 238, 190, .5);
+}
+
+.soft-callout p {
+  margin: 0;
+  color: #80603b;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.life-empty-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 90px;
+  padding: 16px;
+  color: #8a6945;
+  text-align: center;
+  border: 3px dashed #c39a65;
+  border-radius: 18px;
+  background: rgba(255,255,255,.22);
+}
+
+.life-empty-note p {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* ==========================================================
+   🧾 SUBSCRIPTIONS
+   ========================================================== */
+
+.subscription-preview {
+  display: grid;
+  place-items: center;
+  min-height: 155px;
+  padding: 16px;
+  text-align: center;
+  border: 3px dashed #b3864c;
+  border-radius: 17px;
+  background:
+    radial-gradient(circle, rgba(255,255,255,.5), transparent 68%);
+}
+
+.subscription-preview span {
+  color: #8c6a45;
+  font-size: 12px;
+}
+
+.subscription-preview strong {
+  margin-top: 8px;
+  color: #4c8f88;
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.subscription-preview small {
+  color: #9a7955;
+}
+
+.subscription-list {
+  display: grid;
+  gap: 9px;
+}
+
+.subscription-row {
+  display: grid;
+  grid-template-columns: 42px 1fr auto 34px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid rgba(155, 107, 57, .42);
+  border-radius: 15px;
+  background: rgba(255,255,255,.28);
+}
+
+.subscription-badge {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  background: #ddc084;
+}
+
+.subscription-name strong,
+.subscription-name small,
+.subscription-equivalent strong,
+.subscription-equivalent small {
+  display: block;
+}
+
+.subscription-name small,
+.subscription-equivalent small {
+  color: #94714e;
+  font-size: 10px;
+}
+
+.subscription-equivalent {
+  text-align: right;
+}
+
+.tiny-remove {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  cursor: pointer;
+  color: #895035;
+  font-size: 20px;
+  font-weight: 900;
+  border: 2px solid rgba(133, 80, 45, .34);
+  border-radius: 50%;
+  background: rgba(255,255,255,.34);
+}
+
+/* ==========================================================
+   🏠 / 🚗 OBJECT HERO
+   ========================================================== */
+
+.object-hero {
+  display: grid;
+  grid-template-columns: 80px repeat(3, 1fr);
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+  color: #fff8df;
+  border: 4px solid #466c4a;
+  border-radius: 28px 21px 30px 23px;
+  background:
+    radial-gradient(circle at 23% 0, rgba(255,255,255,.23), transparent 40%),
+    linear-gradient(135deg, #77aa55, #4f8843);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.24) inset,
+    0 6px 0 #3b6137,
+    0 11px 15px rgba(63, 45, 25, .18);
+}
+
+.object-hero.car-hero {
+  border-color: #3e6f82;
+  background:
+    radial-gradient(circle at 23% 0, rgba(255,255,255,.23), transparent 40%),
+    linear-gradient(135deg, #69adca, #417e9b);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.24) inset,
+    0 6px 0 #335f72,
+    0 11px 15px rgba(63, 45, 25, .18);
+}
+
+.object-hero-icon {
+  font-size: 48px;
+  text-align: center;
+}
+
+.object-hero small,
+.object-hero strong {
+  display: block;
+}
+
+.object-hero small {
+  opacity: .76;
+  font-size: 10px;
+}
+
+.object-hero strong {
+  margin-top: 4px;
+  font-size: 16px;
+}
+
+.bill-chip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 13px;
+  padding: 11px 14px;
+  color: #fff8df;
+  border-radius: 14px;
+  background: #4c9993;
+}
+
+/* ==========================================================
+   🛒 GROCERY
+   ========================================================== */
+
+.grocery-toolbar {
+  display: grid;
+  grid-template-columns: 1fr 150px auto;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.grocery-toolbar .life-action-button {
+  margin-top: 0;
+}
+
+.grocery-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  padding: 8px 13px;
+  border: 3px solid #98713d;
+  border-radius: 999px;
+  background: #efd08b;
+}
+
+.grocery-summary strong {
+  font-size: 22px;
+}
+
+.grocery-summary small {
+  color: #765536;
+}
+
+.grocery-board {
+  display: grid;
+  gap: 9px;
+}
+
+.grocery-item,
+.task-slip {
+  display: grid !important;
+  grid-template-columns: 30px 1fr 34px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 11px;
+  cursor: pointer;
+  border: 3px solid #aa7a41;
+  border-radius: 16px 13px 18px 14px;
+  background:
+    linear-gradient(rgba(255,255,255,.38), transparent 35%),
+    #f6dfaa;
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.5) inset,
+    0 4px 0 rgba(125, 83, 40, .28);
+}
+
+.grocery-item input,
+.task-slip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.grocery-checkmark,
+.task-check {
+  display: grid !important;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  margin: 0 !important;
+  color: transparent;
+  border: 3px solid #9a7142;
+  border-radius: 9px;
+  background: rgba(255,255,255,.45);
+}
+
+.grocery-item.done .grocery-checkmark,
+.task-slip.done .task-check {
+  color: #fff;
+  border-color: #397c72;
+  background: #55aa9f;
+}
+
+.grocery-item.done strong,
+.task-slip.done strong {
+  opacity: .55;
+  text-decoration: line-through;
+}
+
+.grocery-item div strong,
+.grocery-item div small {
+  display: block;
+}
+
+.grocery-item div small {
+  color: #9a7651;
+  font-size: 10px;
+}
+
+/* ==========================================================
+   🧺 LAUNDRY
+   ========================================================== */
+
+.laundry-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 11px;
+}
+
+.laundry-card {
+  padding: 13px 10px;
+  text-align: center;
+  border: 3px solid #788e56;
+  border-radius: 25px 19px 27px 20px;
+  background:
+    radial-gradient(circle at 30% 0, rgba(255,255,255,.54), transparent 38%),
+    linear-gradient(#c8e09b, #a8c979);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.5) inset,
+    0 5px 0 #657849,
+    0 9px 12px rgba(74, 52, 28, .14);
+}
+
+.laundry-icon {
+  font-size: 34px;
+}
+
+.laundry-card > strong {
+  display: block;
+  margin-top: 5px;
+  color: #4f6337;
+  font-size: 12px;
+}
+
+.laundry-age {
+  margin: 8px 0;
+  color: #6f8156;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+/* ==========================================================
+   🫂 FRIENDS
+   ========================================================== */
+
+.friend-form {
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.friend-board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 11px;
+  margin-top: 15px;
+}
+
+.friend-card {
+  display: grid;
+  grid-template-columns: 48px 1fr 30px;
+  gap: 11px;
+  align-items: center;
+  padding: 12px;
+  border: 3px solid #b57474;
+  border-radius: 22px 17px 24px 18px;
+  background:
+    radial-gradient(circle at 30% 0, rgba(255,255,255,.4), transparent 42%),
+    linear-gradient(#f1b5b3, #dc9294);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.35) inset,
+    0 5px 0 #965f64;
+}
+
+.friend-avatar {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  font-size: 27px;
+  border-radius: 50%;
+  background: #ffe0ad;
+}
+
+.friend-card p {
+  margin: 3px 0;
+  color: #754a4e;
+  font-size: 11px;
+}
+
+.friend-card small {
+  color: #8f6063;
+}
+
+/* ==========================================================
+   📅 APPOINTMENTS
+   ========================================================== */
+
+.appointment-form {
+  grid-template-columns: 1fr 1fr;
+}
+
+.appointment-board {
+  display: grid;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.appointment-ticket {
+  display: grid;
+  grid-template-columns: 62px 1fr 34px;
+  align-items: center;
+  gap: 11px;
+  padding: 10px;
+  border: 3px solid #b8793e;
+  border-radius: 18px;
+  background: #f5d396;
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.42) inset,
+    0 4px 0 rgba(125, 83, 40, .28);
+}
+
+.appointment-date {
+  padding: 7px;
+  text-align: center;
+  color: #fff;
+  border-radius: 13px;
+  background: #c87632;
+}
+
+.appointment-date strong,
+.appointment-date small {
+  display: block;
+}
+
+.appointment-date strong {
+  font-size: 21px;
+}
+
+.appointment-body strong,
+.appointment-body span {
+  display: block;
+}
+
+.appointment-body span {
+  margin-top: 3px;
+  color: #8a623c;
+  font-size: 11px;
+}
+
+/* ==========================================================
+   💼 WORK
+   ========================================================== */
+
+.work-layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 15px;
+}
+
+.work-time-row {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr;
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 11px;
+}
+
+.work-arrow {
+  padding-bottom: 12px;
+  text-align: center;
+  color: #977044;
+  font-weight: 900;
+}
+
+.week-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+
+.weekday-tile {
+  min-height: 86px;
+  cursor: pointer;
+  border: 3px solid #60734a;
+  border-radius: 20px 15px 22px 17px;
+  background:
+    linear-gradient(rgba(255,255,255,.28), transparent 38%),
+    #91b66a;
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.32) inset,
+    0 5px 0 #55673f;
+}
+
+.weekday-tile.off {
+  border-color: #9a8062;
+  background: #c7b69a;
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.28) inset,
+    0 5px 0 #89745b;
+}
+
+.weekday-tile strong,
+.weekday-tile span {
+  display: block;
+}
+
+.weekday-tile strong {
+  color: #fff9df;
+  font-size: 17px;
+}
+
+.weekday-tile span {
+  margin-top: 6px;
+  color: #f3f0dc;
+  font-size: 9px;
+}
+
+/* ==========================================================
+   ✅ TASKS
+   ========================================================== */
+
+.task-topline {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.task-topline > div {
+  min-width: 115px;
+  padding: 9px 13px;
+  border: 3px solid #8d7047;
+  border-radius: 15px;
+  background: #ecd49c;
+}
+
+.task-topline strong,
+.task-topline span {
+  display: block;
+}
+
+.task-topline strong {
+  font-size: 24px;
+}
+
+.task-topline span {
+  color: #846848;
+  font-size: 10px;
+}
+
+.task-board {
+  display: grid;
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.task-slip {
+  grid-template-columns: 30px 1fr 34px;
+}
+
+.task-slip-body strong,
+.task-slip-body small {
+  display: block;
+}
+
+.task-slip-body small {
+  margin-top: 3px;
+  color: #93704a;
+}
+
+/* ==========================================================
+   📐 RESPONSIVE CLUBHOUSE
+   ========================================================== */
+
+@media (max-width: 1120px) {
+  .life-stat-row,
+  .life-split {
+    grid-template-columns: 1fr;
+  }
+
+  .laundry-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .life-form-grid.four {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .work-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 🏡 END LIFE BOARD 002 */
