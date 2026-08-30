@@ -5442,3 +5442,246 @@ footer {
 }
 
 /* 🌱 END HAPPY FRIENDS 002.E */
+
+
+/* 🪜 LIFE WALLET LADDER SCROLLBAR 002.D */
+
+/* ----------------------------------------------------------
+   Firefox fallback
+   ---------------------------------------------------------- */
+
+.control-panel {
+  scrollbar-width: auto;
+  scrollbar-color: #755039 #3d291d;
+}
+
+
+/* ----------------------------------------------------------
+   🪵 Scrollbar footprint
+   ---------------------------------------------------------- */
+
+.control-panel::-webkit-scrollbar {
+  width: 18px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #3b2619,
+      #513521 50%,
+      #352117
+    );
+}
+
+
+/* ----------------------------------------------------------
+   🪜 LADDER CHANNEL
+
+   Horizontal dark marks repeat all the way down the track,
+   making the recessed wooden channel read like tiny rungs.
+   ---------------------------------------------------------- */
+
+.control-panel::-webkit-scrollbar-track {
+  margin: 5px 0;
+
+  border:
+    2px solid #4a2d1c;
+
+  border-radius:
+    999px;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+
+      transparent 0px,
+      transparent 10px,
+
+      rgba(52, 28, 16, 0.72) 10px,
+      rgba(52, 28, 16, 0.72) 12px,
+
+      rgba(213, 151, 91, 0.18) 12px,
+      rgba(213, 151, 91, 0.18) 13px,
+
+      transparent 13px,
+      transparent 21px
+    ),
+
+    linear-gradient(
+      90deg,
+
+      #4a2c1c 0%,
+      #6d472e 15%,
+      #895d3d 35%,
+      #966744 50%,
+      #805438 67%,
+      #634029 84%,
+      #42291b 100%
+    );
+
+  box-shadow:
+    inset 3px 0 3px rgba(255, 213, 156, 0.14),
+    inset -3px 0 4px rgba(35, 18, 10, 0.46),
+    inset 0 0 5px rgba(45, 24, 14, 0.38),
+    0 0 0 1px rgba(111, 66, 37, 0.35);
+}
+
+
+/* ----------------------------------------------------------
+   🪵 MOVABLE WOODEN HANDLE
+   ---------------------------------------------------------- */
+
+.control-panel::-webkit-scrollbar-thumb {
+  min-height:
+    64px;
+
+  border:
+    3px solid #472a1b;
+
+  border-radius:
+    999px;
+
+  background:
+    /* tiny horizontal wood cuts */
+    repeating-linear-gradient(
+      to bottom,
+
+      transparent 0px,
+      transparent 11px,
+
+      rgba(70, 38, 21, 0.22) 11px,
+      rgba(70, 38, 21, 0.22) 12px,
+
+      transparent 12px,
+      transparent 19px
+    ),
+
+    /* little exposure stripe */
+    radial-gradient(
+      ellipse at 34% 18%,
+      rgba(255, 225, 177, 0.24),
+      transparent 36%
+    ),
+
+    linear-gradient(
+      90deg,
+
+      #583622 0%,
+      #765038 18%,
+      #936747 43%,
+      #9d6d4b 51%,
+      #7b5036 76%,
+      #4d2f20 100%
+    );
+
+  box-shadow:
+    inset 2px 0 2px rgba(255, 223, 177, 0.20),
+    inset -3px 0 3px rgba(34, 17, 9, 0.40),
+    inset 0 3px 2px rgba(255, 220, 164, 0.12),
+    inset 0 -4px 3px rgba(39, 20, 11, 0.42),
+    0 2px 3px rgba(48, 27, 16, 0.44);
+}
+
+
+.control-panel::-webkit-scrollbar-thumb:hover {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+
+      transparent 0px,
+      transparent 11px,
+
+      rgba(70, 38, 21, 0.24) 11px,
+      rgba(70, 38, 21, 0.24) 12px,
+
+      transparent 12px,
+      transparent 19px
+    ),
+
+    radial-gradient(
+      ellipse at 34% 18%,
+      rgba(255, 235, 194, 0.30),
+      transparent 36%
+    ),
+
+    linear-gradient(
+      90deg,
+
+      #62402a,
+      #865b3d 22%,
+      #a47450 50%,
+      #87593b 77%,
+      #573522
+    );
+}
+
+
+/* ----------------------------------------------------------
+   🟨 LITTLE WOODEN END CAPS
+   ---------------------------------------------------------- */
+
+.control-panel::-webkit-scrollbar-button {
+  display:
+    block;
+
+  height:
+    21px;
+
+  border:
+    2px solid #4b2c1b;
+
+  background-color:
+    #765039;
+
+  background-repeat:
+    no-repeat;
+
+  background-position:
+    center;
+
+  background-size:
+    9px 7px;
+
+  box-shadow:
+    inset 0 2px 2px rgba(255, 224, 175, 0.17),
+    inset 0 -2px 2px rgba(38, 20, 11, 0.43);
+}
+
+
+/* ▲ */
+
+.control-panel::-webkit-scrollbar-button:vertical:decrement {
+  border-radius:
+    999px 999px 5px 5px;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' viewBox='0 0 9 7'%3E%3Cpath d='M4.5 0L9 7H0Z' fill='%23ffd84f'/%3E%3C/svg%3E");
+}
+
+
+/* ▼ */
+
+.control-panel::-webkit-scrollbar-button:vertical:increment {
+  border-radius:
+    5px 5px 999px 999px;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' viewBox='0 0 9 7'%3E%3Cpath d='M0 0H9L4.5 7Z' fill='%23ffd84f'/%3E%3C/svg%3E");
+}
+
+
+.control-panel::-webkit-scrollbar-button:hover {
+  background-color:
+    #8b6040;
+}
+
+
+/* ----------------------------------------------------------
+   🪵 Never expose a Windows-white corner
+   ---------------------------------------------------------- */
+
+.control-panel::-webkit-scrollbar-corner {
+  background:
+    #3d291d;
+}
+
+/* 🪜 END LIFE WALLET LADDER SCROLLBAR 002.D */
