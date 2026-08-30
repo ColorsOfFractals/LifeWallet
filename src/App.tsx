@@ -329,7 +329,54 @@ const nicheAreas: NicheArea[] = [
     ],
     color: "warranties",
   },
-];
+  {
+    id: "projects",
+    icon: "🛠️",
+    title: "PROJECTS / SIDE QUESTS",
+    short: "What was I building again?",
+    question: "What project, experiment, hobby, or ridiculous idea do I want future-me to find again?",
+    examples: [
+      "Project I want to start",
+      "Thing I left half-finished",
+      "Next step for a project",
+      "Where the project files live",
+      "Something I want to build",
+      "Idea worth trying later",
+    ],
+    color: "projects",
+  },
+  {
+    id: "movies",
+    icon: "🍿",
+    title: "MOVIES / TV",
+    short: "What was that thing I wanted to watch?",
+    question: "What movie, show, documentary, or series do I not want to lose in the void?",
+    examples: [
+      "Movie someone recommended",
+      "Show I want to start",
+      "Series I'm currently watching",
+      "Waiting for another season",
+      "Something I loved",
+      "Something I stopped watching",
+    ],
+    color: "movies",
+  },
+  {
+    id: "music",
+    icon: "🎵",
+    title: "MUSIC",
+    short: "That song was good. What was it?",
+    question: "What song, album, artist, or musical rabbit hole do I want to remember?",
+    examples: [
+      "Song someone showed me",
+      "Album I want to hear",
+      "Artist I want to explore",
+      "Old song I rediscovered",
+      "Song I heard somewhere",
+      "Music for a specific mood",
+    ],
+    color: "music",
+  },];
 
 type Companion = {
   id: string;

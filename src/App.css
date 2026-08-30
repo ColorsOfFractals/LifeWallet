@@ -5685,3 +5685,237 @@ footer {
 }
 
 /* 🪜 END LIFE WALLET LADDER SCROLLBAR 002.D */
+
+
+/* 🍬 LIFE WALLET NICHE POP PASS 002.F */
+
+/* ==========================================================
+   🍬 ALL JUNK DRAWER CARDS — MORE POKEABLE
+   ========================================================== */
+
+.niche-button {
+  overflow: hidden;
+
+  border-width: 3px;
+  border-radius: 15px 13px 17px 14px;
+
+  box-shadow:
+    inset 0 4px 0 rgba(255,255,255,.24),
+    inset 0 -6px 0 rgba(64,37,20,.18),
+    0 6px 0 rgba(72,45,27,.78),
+    0 10px 13px rgba(61,37,20,.22);
+
+  text-shadow:
+    0 1px 0 rgba(58,34,19,.38);
+
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    box-shadow 120ms ease;
+}
+
+/* glossy candy light */
+.niche-button::before {
+  content: "";
+  position: absolute;
+  inset: 3px 5px auto 5px;
+  height: 35%;
+
+  pointer-events: none;
+
+  border-radius: 11px 10px 45% 45%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.25),
+      rgba(255,255,255,.07) 58%,
+      transparent
+    );
+}
+
+/* subtle lower edge depth */
+.niche-button::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 4px;
+  height: 5px;
+
+  pointer-events: none;
+
+  border-radius: 999px;
+
+  background:
+    rgba(45,25,15,.14);
+}
+
+.niche-button:hover {
+  transform: translateY(-3px) scale(1.018);
+  filter: brightness(1.10) saturate(1.13);
+
+  box-shadow:
+    inset 0 4px 0 rgba(255,255,255,.29),
+    inset 0 -6px 0 rgba(64,37,20,.16),
+    0 8px 0 rgba(72,45,27,.76),
+    0 14px 17px rgba(61,37,20,.25);
+}
+
+.niche-button:active {
+  transform: translateY(3px) scale(.995);
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.18),
+    inset 0 -4px 0 rgba(64,37,20,.18),
+    0 2px 0 rgba(72,45,27,.78),
+    0 5px 7px rgba(61,37,20,.18);
+}
+
+.niche-button strong {
+  position: relative;
+  z-index: 2;
+
+  font-size: 11px;
+
+  color: #fff8df;
+
+  text-shadow:
+    0 2px 0 rgba(67,38,20,.50),
+    0 3px 4px rgba(42,25,16,.18);
+}
+
+.niche-button small {
+  position: relative;
+  z-index: 2;
+
+  color: rgba(255,248,223,.92);
+
+  text-shadow:
+    0 1px 1px rgba(54,31,18,.42);
+}
+
+.niche-icon,
+.niche-pin,
+.niche-memory-badge {
+  position: relative;
+  z-index: 3;
+}
+
+
+/* ==========================================================
+   🛠️ PROJECTS / SIDE QUESTS
+   Workshop moss / olive
+   ========================================================== */
+
+.niche-projects {
+  background:
+    radial-gradient(
+      circle at 28% 7%,
+      rgba(255,255,255,.20),
+      transparent 31%
+    ),
+    linear-gradient(
+      145deg,
+      #89a94e,
+      #58782e 58%,
+      #3f5d23
+    );
+}
+
+
+/* ==========================================================
+   🍿 MOVIES / TV
+   Theater red / warm coral
+   ========================================================== */
+
+.niche-movies {
+  background:
+    radial-gradient(
+      circle at 28% 7%,
+      rgba(255,255,255,.21),
+      transparent 31%
+    ),
+    linear-gradient(
+      145deg,
+      #df674f,
+      #b64337 57%,
+      #8f302c
+    );
+}
+
+
+/* ==========================================================
+   🎵 MUSIC
+   Juicy purple
+   ========================================================== */
+
+.niche-music {
+  background:
+    radial-gradient(
+      circle at 28% 7%,
+      rgba(255,255,255,.22),
+      transparent 31%
+    ),
+    linear-gradient(
+      145deg,
+      #9b69b8,
+      #74458f 57%,
+      #53306d
+    );
+}
+
+
+/* ==========================================================
+   🏡 MATCH THE FULL-ROOM ICON TILE
+   ========================================================== */
+
+.niche-room-big-icon.niche-projects,
+.niche-room-big-icon.niche-movies,
+.niche-room-big-icon.niche-music {
+  background:
+    radial-gradient(
+      circle at 28% 14%,
+      rgba(255,255,255,.36),
+      transparent 30%
+    ),
+    var(--niche-room-color);
+}
+
+.niche-room-big-icon.niche-projects {
+  --niche-room-color: #66883a;
+}
+
+.niche-room-big-icon.niche-movies {
+  --niche-room-color: #bd493c;
+}
+
+.niche-room-big-icon.niche-music {
+  --niche-room-color: #754b91;
+}
+
+
+/* ==========================================================
+   ✨ EXISTING CARDS — EXTRA SATURATION WITHOUT RECOLORING
+   ========================================================== */
+
+.niche-paperwork,
+.niche-renewals,
+.niche-orders,
+.niche-homecare,
+.niche-documents,
+.niche-insurance,
+.niche-pets,
+.niche-health,
+.niche-taxes,
+.niche-dates,
+.niche-travel,
+.niche-warranties,
+.niche-projects,
+.niche-movies,
+.niche-music {
+  background-blend-mode: normal;
+}
+
+
+/* 🍬 END LIFE WALLET NICHE POP PASS 002.F */
