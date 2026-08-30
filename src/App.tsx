@@ -331,6 +331,75 @@ const nicheAreas: NicheArea[] = [
   },
 ];
 
+type Companion = {
+  id: string;
+  name: string;
+  description: string;
+  lines: string[];
+};
+
+const companions: Companion[] = [
+  {
+    id: "sprout",
+    name: "Sprout",
+    description: "Round. Leafy. Extremely employed at nothing.",
+    lines: [
+      "All my stuff!",
+      "Nice.",
+      "I live here now.",
+      "Big wallet.",
+      ":)",
+    ],
+  },
+  {
+    id: "marmalade",
+    name: "Marmalade",
+    description: "A tiny orange fuzzball with no known obligations.",
+    lines: [
+      "Warm.",
+      "Found a ledge.",
+      "Excellent button.",
+      "I brought nothing.",
+      "Hello!",
+    ],
+  },
+  {
+    id: "mush",
+    name: "Mush",
+    description: "A purple forest lump doing their absolute best.",
+    lines: [
+      "Hmm.",
+      "Very organized.",
+      "Good shelf.",
+      "I approve.",
+      "Bonk.",
+    ],
+  },
+  {
+    id: "puddle",
+    name: "Puddle",
+    description: "A blue bean who appears to be mostly water.",
+    lines: [
+      "plip",
+      "Everything seems fine.",
+      "Nice weather.",
+      "I have arrived.",
+      "boop",
+    ],
+  },
+  {
+    id: "wicket",
+    name: "Wicket",
+    description: "Long ears. Short thoughts. Excellent company.",
+    lines: [
+      "What's that?",
+      "Oh! A button.",
+      "This place rules.",
+      "I am supervising.",
+      "Carry on.",
+    ],
+  },
+];
 const money = (value: number) =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -341,6 +410,32 @@ const todayISO = () => new Date().toISOString().slice(0, 10);
 
 function App() {
   const [activeId, setActiveId] = useState<Area["id"]>("subscriptions");
+
+  // ----------------------------------------------------------
+  // 🌱 Happy Friends
+  // ----------------------------------------------------------
+
+  const [companionPickerOpen, setCompanionPickerOpen] = useState(false);
+  const [selectedCompanionId, setSelectedCompanionId] =
+    useState<string | null>(null);
+  const [companionLineIndex, setCompanionLineIndex] = useState(0);
+
+  const selectedCompanion =
+    companions.find((friend) => friend.id === selectedCompanionId) ?? null;
+
+  const summonCompanion = (id: string) => {
+    setSelectedCompanionId(id);
+    setCompanionLineIndex(0);
+    setCompanionPickerOpen(false);
+  };
+
+  const pokeCompanion = () => {
+    if (!selectedCompanion) return;
+
+    setCompanionLineIndex((current) =>
+      (current + 1) % selectedCompanion.lines.length
+    );
+  };
   const [nicheActive, setNicheActive] = useState<string | null>(null);
 
   const [nicheEntries, setNicheEntries] =
@@ -2082,6 +2177,110 @@ function App() {
         </aside>
 
         <section className="world">
+
+          <button
+            className={`companion-summoner ${
+              companionPickerOpen ? "summoner-open" : ""
+            }`}
+            onClick={() =>
+              setCompanionPickerOpen((current) => !current)
+            }
+            title="Choose a little friend"
+          >
+            <span className="summoner-face">☺</span>
+
+            <span className="summoner-copy">
+              <strong>COMPANION</strong>
+              <small>summon friend</small>
+            </span>
+          </button>
+
+          {companionPickerOpen && (
+            <div className="companion-picker">
+
+              <div className="companion-picker-sign">
+                <span>🌱</span>
+                PICK A LITTLE DUDE
+                <span>🌱</span>
+              </div>
+
+              <div className="companion-picker-grid">
+
+                {companions.map((friend) => (
+                  <button
+                    key={friend.id}
+                    className={`companion-choice companion-${friend.id} ${
+                      selectedCompanionId === friend.id
+                        ? "companion-choice-selected"
+                        : ""
+                    }`}
+                    onClick={() => summonCompanion(friend.id)}
+                  >
+                    <div className="choice-creature">
+                      <span className="choice-ear choice-ear-left" />
+                      <span className="choice-ear choice-ear-right" />
+
+                      <span className="choice-eye choice-eye-left" />
+                      <span className="choice-eye choice-eye-right" />
+                    </div>
+
+                    <strong>{friend.name}</strong>
+                    <small>{friend.description}</small>
+                  </button>
+                ))}
+
+              </div>
+
+              {selectedCompanion && (
+                <button
+                  className="companion-dismiss"
+                  onClick={() => {
+                    setSelectedCompanionId(null);
+                    setCompanionPickerOpen(false);
+                  }}
+                >
+                  Let my friend wander off
+                </button>
+              )}
+
+            </div>
+          )}
+
+          <div className="companion-ledge-stage">
+
+            {selectedCompanion && (
+              <div className="companion-home">
+
+                <div className="companion-speech">
+                  {selectedCompanion.lines[companionLineIndex]}
+                </div>
+
+                <button
+                  className={`companion companion-${selectedCompanion.id}`}
+                  onClick={pokeCompanion}
+                  title={`Say hi to ${selectedCompanion.name}`}
+                >
+                  <span className="companion-ear companion-ear-left" />
+                  <span className="companion-ear companion-ear-right" />
+
+                  <span className="companion-eye companion-eye-left">
+                    <span />
+                  </span>
+
+                  <span className="companion-eye companion-eye-right">
+                    <span />
+                  </span>
+
+                  <span className="companion-mouth" />
+                  <span className="companion-foot companion-foot-left" />
+                  <span className="companion-foot companion-foot-right" />
+                </button>
+
+              </div>
+            )}
+
+          </div>
+
           <div className="landscape">
             <div className="hill hill-back" />
             <div className="hill hill-front" />
