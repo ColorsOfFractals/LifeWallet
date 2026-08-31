@@ -58,6 +58,221 @@ type TaskItem = {
   done: boolean;
 };
 
+type LifeCalendarProps = {
+  value: string;
+  onChange: (value: string) => void;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+};
+
+function LifeCalendar({
+  value,
+  onChange,
+  isOpen,
+  onOpen,
+  onClose,
+}: LifeCalendarProps) {
+  const parseISODate = (iso: string) => {
+    if (!iso) return null;
+
+    const [year, month, day] = iso.split("-").map(Number);
+
+    if (!year || !month || !day) return null;
+
+    return new Date(year, month - 1, day);
+  };
+
+  const toISODate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const initialDate = parseISODate(value) ?? new Date();
+
+  const [viewYear, setViewYear] = useState(initialDate.getFullYear());
+  const [viewMonth, setViewMonth] = useState(initialDate.getMonth());
+
+  const selected = parseISODate(value);
+  const today = new Date();
+
+  const monthName = new Date(
+    viewYear,
+    viewMonth,
+    1
+  ).toLocaleDateString(undefined, {
+    month: "long",
+    year: "numeric",
+  });
+
+  const firstWeekday = new Date(viewYear, viewMonth, 1).getDay();
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+  const previousMonth = () => {
+    if (viewMonth === 0) {
+      setViewMonth(11);
+      setViewYear((year) => year - 1);
+      return;
+    }
+
+    setViewMonth((month) => month - 1);
+  };
+
+  const nextMonth = () => {
+    if (viewMonth === 11) {
+      setViewMonth(0);
+      setViewYear((year) => year + 1);
+      return;
+    }
+
+    setViewMonth((month) => month + 1);
+  };
+
+  const chooseToday = () => {
+    const now = new Date();
+
+    setViewYear(now.getFullYear());
+    setViewMonth(now.getMonth());
+    onChange(toISODate(now));
+    onClose();
+  };
+
+  const displayValue = selected
+    ? selected.toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : "Pick a day";
+
+  const cells = Array.from(
+    { length: firstWeekday + daysInMonth },
+    (_, index) => {
+      if (index < firstWeekday) return null;
+      return index - firstWeekday + 1;
+    }
+  );
+
+  return (
+    <div className={`life-calendar ${isOpen ? "open" : ""}`}>
+      <button
+        type="button"
+        className="life-calendar-trigger"
+        onClick={() => (isOpen ? onClose() : onOpen())}
+        aria-expanded={isOpen}
+      >
+        <span className="life-calendar-trigger-icon">📅</span>
+        <span>{displayValue}</span>
+        <span className="life-calendar-trigger-arrow">
+          {isOpen ? "▲" : "▼"}
+        </span>
+      </button>
+
+      {isOpen && (
+        <div className="life-calendar-popover">
+          <div className="life-calendar-cap">
+            <button
+              type="button"
+              className="life-calendar-nav"
+              onClick={previousMonth}
+              aria-label="Previous month"
+            >
+              ‹
+            </button>
+
+            <strong>{monthName}</strong>
+
+            <button
+              type="button"
+              className="life-calendar-nav"
+              onClick={nextMonth}
+              aria-label="Next month"
+            >
+              ›
+            </button>
+          </div>
+
+          <div className="life-calendar-weekdays">
+            {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
+              <span key={day}>{day}</span>
+            ))}
+          </div>
+
+          <div className="life-calendar-days">
+            {cells.map((day, index) => {
+              if (day === null) {
+                return (
+                  <span
+                    className="life-calendar-blank"
+                    key={`blank-${index}`}
+                  />
+                );
+              }
+
+              const candidate = new Date(viewYear, viewMonth, day);
+
+              const isSelected =
+                selected !== null &&
+                selected.getFullYear() === viewYear &&
+                selected.getMonth() === viewMonth &&
+                selected.getDate() === day;
+
+              const isToday =
+                today.getFullYear() === viewYear &&
+                today.getMonth() === viewMonth &&
+                today.getDate() === day;
+
+              return (
+                <button
+                  type="button"
+                  key={day}
+                  className={[
+                    "life-calendar-day",
+                    isSelected ? "selected" : "",
+                    isToday ? "today" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  onClick={() => {
+                    onChange(toISODate(candidate));
+                    onClose();
+                  }}
+                >
+                  {day}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="life-calendar-footer">
+            <button
+              type="button"
+              className="life-calendar-clear"
+              onClick={() => {
+                onChange("");
+                onClose();
+              }}
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              className="life-calendar-today"
+              onClick={chooseToday}
+            >
+              ☀ Today
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const areas: Area[] = [
   {
     id: "subscriptions",
@@ -640,6 +855,10 @@ function App() {
     work: "",
     delicates: "",
   });
+
+  // 📅 BAKE 003.D — only one Laundry calendar may be open
+  const [openLaundryCalendar, setOpenLaundryCalendar] =
+    useState<string | null>(null);
 
   // ----------------------------------------------------------
   // 🫂 Friends
@@ -1421,13 +1640,16 @@ function App() {
                 {elapsedLabel(laundryDates[key])}
               </div>
 
-              <input
-                type="date"
+
+              <LifeCalendar
                 value={laundryDates[key]}
-                onChange={(e) =>
+                isOpen={openLaundryCalendar === key}
+                onOpen={() => setOpenLaundryCalendar(key)}
+                onClose={() => setOpenLaundryCalendar(null)}
+                onChange={(date) =>
                   setLaundryDates((current) => ({
                     ...current,
-                    [key]: e.target.value,
+                    [key]: date,
                   }))
                 }
               />
@@ -1831,6 +2053,12 @@ function App() {
       setJournalDraft("");
     };
 
+    const deleteJournalEntry = (id: string) => {
+      setJournalEntries((current) =>
+        current.filter((entry) => entry.id !== id)
+      );
+    };
+
     if (houseView === "journal") {
       return (
         <div className="life-room-content house-room journal-room">
@@ -1902,7 +2130,19 @@ function App() {
                         className="journal-entry"
                         key={entry.id}
                       >
-                        <small>{entry.date}</small>
+                        <div className="journal-entry-topline">
+                          <small>{entry.date}</small>
+
+                          <button
+                            className="journal-delete-button"
+                            onClick={() => deleteJournalEntry(entry.id)}
+                            title="Delete this page"
+                            aria-label="Delete journal entry"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+
                         <p>{entry.text}</p>
                       </article>
                     ))}

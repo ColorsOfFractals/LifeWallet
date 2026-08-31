@@ -6711,3 +6711,529 @@ footer {
 }
 
 /* 🚪 END LIFE WALLET HOUSE MODE 003 */
+
+/* ==========================================================
+   🌱 LIFE WALLET JOURNAL POLISH 003.A
+   Tiny eraser + cartoon scrollbar
+   ========================================================== */
+
+.journal-entry-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.journal-delete-button {
+  width: 28px;
+  height: 26px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #7a5b24;
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe875 0%,
+      #f2c94c 55%,
+      #dcae34 100%
+    );
+
+  color: #5c4620;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.42),
+    inset 0 -3px 0 rgba(132,93,20,.16),
+    0 3px 0 #8d6a29,
+    0 5px 7px rgba(76,54,27,.15);
+
+  transition:
+    transform 110ms ease,
+    filter 110ms ease,
+    box-shadow 110ms ease;
+}
+
+.journal-delete-button:hover {
+  transform: translateY(-2px) rotate(3deg);
+  filter: brightness(1.06) saturate(1.08);
+}
+
+.journal-delete-button:active {
+  transform: translateY(2px);
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.32),
+    0 1px 0 #8d6a29;
+}
+
+
+/* 🌿 Firefox */
+
+.journal-entry-stack {
+  scrollbar-width: auto;
+  scrollbar-color: #4f8a55 #f4d65d;
+}
+
+
+/* 🌻 Chromium / Tauri / WebKit */
+
+.journal-entry-stack::-webkit-scrollbar {
+  width: 16px;
+}
+
+.journal-entry-stack::-webkit-scrollbar-track {
+  border: 2px solid #99772d;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #e6bf42 0%,
+      #ffe97a 45%,
+      #f0cc4e 100%
+    );
+
+  box-shadow:
+    inset 0 0 4px rgba(104,76,20,.22);
+}
+
+.journal-entry-stack::-webkit-scrollbar-thumb {
+  border: 3px solid #f5d95e;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #396e43 0%,
+      #67a962 48%,
+      #3f7b4b 100%
+    );
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.24),
+    inset 0 -3px 0 rgba(38,82,45,.22);
+}
+
+.journal-entry-stack::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      90deg,
+      #43804d 0%,
+      #79ba70 48%,
+      #4b8c56 100%
+    );
+}
+
+.journal-entry-stack::-webkit-scrollbar-button:single-button {
+  height: 16px;
+
+  border: 2px solid #99772d;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe97a,
+      #e7bd42
+    );
+}
+
+/* 🌱 END LIFE WALLET JOURNAL POLISH 003.A */
+
+/* ==========================================================
+   📅 LIFE WALLET CALENDAR 003.C
+   Portable green + yellow cartoon calendar.
+   ========================================================== */
+
+.life-calendar {
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}
+
+.life-calendar.open {
+  z-index: 500;
+}
+
+.life-calendar-trigger {
+  width: 100%;
+  min-height: 43px;
+  padding: 7px 10px;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 7px;
+
+  border: 2px solid #a67236;
+  border-radius: 11px;
+
+  background:
+    radial-gradient(
+      circle at 22% 5%,
+      rgba(255,255,255,.5),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #fff2a4 0%,
+      #f7d865 55%,
+      #e8bd43 100%
+    );
+
+  color: #604522;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: left;
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.46),
+    inset 0 -3px 0 rgba(139,91,25,.13),
+    0 3px 0 #9a692f,
+    0 5px 7px rgba(77,49,22,.14);
+}
+
+.life-calendar-trigger:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04) saturate(1.05);
+}
+
+.life-calendar-trigger:active {
+  transform: translateY(2px);
+}
+
+.life-calendar-trigger-icon {
+  font-size: 17px;
+}
+
+.life-calendar-trigger-arrow {
+  color: #4d7844;
+  font-size: 9px;
+}
+
+.life-calendar-popover {
+  width: 252px;
+  padding: 8px;
+
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 10px);
+  z-index: 999;
+
+  transform: translateX(-50%);
+
+  border: 4px solid #4b6938;
+  border-radius: 18px;
+
+  background:
+    radial-gradient(
+      circle at 18% 4%,
+      rgba(255,255,255,.45),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #fff7bd 0%,
+      #f6df79 100%
+    );
+
+  color: #513f25;
+
+  box-shadow:
+    inset 0 4px 0 rgba(255,255,255,.3),
+    inset 0 -5px 0 rgba(119,90,30,.1),
+    0 6px 0 #38532f,
+    0 12px 20px rgba(59,43,24,.28);
+}
+
+.life-calendar-popover::before {
+  content: "";
+
+  width: 17px;
+  height: 17px;
+
+  position: absolute;
+  left: calc(50% - 9px);
+  top: -11px;
+
+  border-left: 3px solid #4b6938;
+  border-top: 3px solid #4b6938;
+
+  background: #79af59;
+  transform: rotate(45deg);
+}
+
+.life-calendar-cap {
+  min-height: 42px;
+  padding: 5px 7px;
+
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  gap: 5px;
+
+  position: relative;
+  z-index: 1;
+
+  border: 2px solid #3e6738;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #8fca68 0%,
+      #64a051 55%,
+      #4e8644 100%
+    );
+
+  color: #fff8ce;
+  text-align: center;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.24),
+    0 3px 0 #365d34;
+}
+
+.life-calendar-cap strong {
+  font-size: 12px;
+  letter-spacing: .3px;
+  text-shadow: 0 2px 0 rgba(48,85,43,.7);
+}
+
+.life-calendar-nav {
+  width: 30px;
+  height: 29px;
+  padding: 0;
+
+  border: 2px solid #8a671f;
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffec76,
+      #e9bd3f
+    );
+
+  color: #5a4522;
+  font-size: 22px;
+  font-weight: 950;
+  line-height: 1;
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.42),
+    0 2px 0 #7d5b21;
+}
+
+.life-calendar-nav:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.life-calendar-weekdays {
+  margin: 10px 2px 4px;
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+
+  color: #597148;
+  font-size: 9px;
+  font-weight: 950;
+  text-align: center;
+}
+
+.life-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.life-calendar-day,
+.life-calendar-blank {
+  aspect-ratio: 1;
+}
+
+.life-calendar-day {
+  padding: 0;
+
+  border: 1px solid rgba(135,99,38,.38);
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff9cf,
+      #f7e8a6
+    );
+
+  color: #614b2c;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.6),
+    0 2px 0 rgba(134,96,32,.22);
+}
+
+.life-calendar-day:hover {
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(1.04) saturate(1.08);
+}
+
+.life-calendar-day.today {
+  border: 2px solid #dea929;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff178,
+      #f0c642
+    );
+
+  color: #664a14;
+}
+
+.life-calendar-day.selected {
+  border: 2px solid #355f39;
+
+  background:
+    linear-gradient(
+      180deg,
+      #78b761,
+      #4d8a4a
+    );
+
+  color: #fff9d9;
+
+  text-shadow:
+    0 1px 0 rgba(40,77,39,.6);
+
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.18),
+    inset 0 -3px 0 rgba(33,75,38,.2),
+    0 2px 0 #315936;
+}
+
+.life-calendar-day.selected.today {
+  outline: 2px solid #f3ca45;
+  outline-offset: 1px;
+}
+
+.life-calendar-footer {
+  margin-top: 9px;
+  padding-top: 8px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+
+  border-top:
+    2px dashed rgba(109,80,34,.25);
+}
+
+.life-calendar-clear,
+.life-calendar-today {
+  padding: 6px 10px;
+
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 9px;
+  font-weight: 950;
+
+  cursor: pointer;
+}
+
+.life-calendar-clear {
+  border: 2px solid #a67a37;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff3b0,
+      #e8cb6a
+    );
+
+  color: #6b5127;
+}
+
+.life-calendar-today {
+  border: 2px solid #3f6e42;
+
+  background:
+    linear-gradient(
+      180deg,
+      #82bd67,
+      #548f4f
+    );
+
+  color: #fff8d3;
+}
+
+.life-calendar-clear:active,
+.life-calendar-today:active {
+  transform: translateY(2px);
+}
+
+.laundry-card {
+  overflow: visible;
+}
+
+/* 📅 END LIFE WALLET CALENDAR 003.C */
+
+/* ==========================================================
+   📅 LIFE WALLET CALENDAR DISCIPLINE 003.D
+   One calendar at a time. Keep the right wall civilized.
+   ========================================================== */
+
+/*
+   The last Laundry card lives against the right wall.
+   Instead of centering its 252px calendar past the edge,
+   anchor the popup to the card's right side.
+*/
+.laundry-card:last-child .life-calendar-popover {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/*
+   Move its little pointer with it.
+*/
+.laundry-card:last-child .life-calendar-popover::before {
+  left: auto;
+  right: 42px;
+}
+
+/* 📅 END LIFE WALLET CALENDAR DISCIPLINE 003.D */
+
+/* ==========================================================
+   🪞 LIFE WALLET LEFT WALL MIRROR 003.D.1
+   First card grows inward from the left edge.
+   ========================================================== */
+
+.laundry-card:first-child .life-calendar-popover {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+
+.laundry-card:first-child .life-calendar-popover::before {
+  left: 42px;
+  right: auto;
+}
+
+/* 🪞 END LIFE WALLET LEFT WALL MIRROR 003.D.1 */
