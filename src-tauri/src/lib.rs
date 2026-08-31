@@ -12,7 +12,7 @@ fn install_life_wallet_native_icons(
 ) -> Result<(), Box<dyn std::error::Error>> {
     use std::ffi::OsStr;
     use std::os::windows::ffi::OsStrExt;
-    use std::path::PathBuf;
+    use tauri::Manager;
 
     type Hwnd = isize;
     type Hicon = isize;
@@ -45,9 +45,13 @@ fn install_life_wallet_native_icons(
         ) -> isize;
     }
 
-    let mut icon_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    icon_path.push("icons");
-    icon_path.push("icon.ico");
+    // 🪙 LIFE WALLET INSTALLED MEDALLION 005.A
+    let icon_path = window
+        .app_handle()
+        .path()
+        .resource_dir()?
+        .join("icons")
+        .join("icon.ico");
 
     let wide_path: Vec<u16> = OsStr::new(&icon_path)
         .encode_wide()
