@@ -7237,3 +7237,587 @@ footer {
 }
 
 /* 🪞 END LIFE WALLET LEFT WALL MIRROR 003.D.1 */
+
+/* ==========================================================
+   ⏰ LIFE WALLET CLOCKWORK PICKER 006.A
+   Candy-clock machinery: red shell, yellow guts.
+   ========================================================== */
+
+.life-time-picker {
+  position: relative;
+  min-width: 0;
+}
+
+.life-time-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #72502f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.life-time-trigger {
+  width: 100%;
+  min-height: 43px;
+  display: grid;
+  grid-template-columns: 28px 1fr 18px;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 9px;
+  border: 2px solid #a63124;
+  border-radius: 13px;
+  color: #6c211a;
+  background:
+    linear-gradient(
+      180deg,
+      #fff3a5 0%,
+      #ffd954 52%,
+      #eeb92d 100%
+    );
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.78),
+    inset 0 -3px 0 rgba(150,73,22,.18),
+    0 3px 0 #9c4824,
+    0 5px 8px rgba(82,45,22,.18);
+  cursor: pointer;
+  font: inherit;
+}
+
+.life-time-trigger:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+
+.life-time-trigger:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px 4px rgba(104,42,20,.18),
+    0 1px 0 #9c4824;
+}
+
+.life-time-trigger-icon {
+  font-size: 19px;
+}
+
+.life-time-trigger strong {
+  text-align: left;
+  font-size: 13px;
+}
+
+.life-time-trigger-arrow {
+  color: #a33123;
+  font-size: 10px;
+}
+
+.life-time-popover {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + 11px);
+  left: 50%;
+  width: 286px;
+  transform: translateX(-50%);
+  padding: 8px;
+  border: 4px solid #8d281f;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      180deg,
+      #d84831 0%,
+      #b62e25 48%,
+      #8e241f 100%
+    );
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.28),
+    inset 0 -5px 0 rgba(91,22,18,.28),
+    0 7px 0 rgba(89,43,24,.30),
+    0 12px 20px rgba(67,39,21,.24);
+}
+
+.life-time-popover::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateX(-50%) rotate(45deg);
+  border-left: 4px solid #8d281f;
+  border-top: 4px solid #8d281f;
+  background: #d84831;
+}
+
+.life-time-cap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  border: 2px solid #7c211b;
+  border-radius: 12px;
+  color: #fff5c8;
+  text-shadow: 0 2px 0 rgba(83,18,14,.42);
+  background:
+    linear-gradient(180deg, #e85a3e, #ad2b24);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.22),
+    0 2px 0 rgba(92,24,18,.55);
+  font-size: 12px;
+  letter-spacing: .4px;
+}
+
+.life-time-readout {
+  margin: 9px 3px 8px;
+  padding: 8px 9px;
+  border: 3px solid #9a5d18;
+  border-radius: 13px;
+  color: #74231b;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  background:
+    linear-gradient(
+      180deg,
+      #fff8bd 0%,
+      #ffe66f 56%,
+      #f3c83d 100%
+    );
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.85),
+    inset 0 -3px 0 rgba(157,93,20,.18);
+}
+
+.life-time-colon {
+  display: inline-block;
+  padding: 0 3px;
+  color: #b33125;
+}
+
+.life-time-period-readout {
+  margin-left: 8px;
+  padding: 3px 6px;
+  border-radius: 7px;
+  color: #fff5c2;
+  background: #ad3025;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.life-time-wheels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 64px;
+  gap: 6px;
+  padding: 7px;
+  border: 2px solid #9c5e1a;
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      180deg,
+      #fff1a0,
+      #ffd95d
+    );
+  box-shadow:
+    inset 0 2px 5px rgba(125,76,18,.18),
+    inset 0 2px 0 rgba(255,255,255,.55);
+}
+
+.life-time-wheel {
+  min-width: 0;
+}
+
+.life-time-wheel-title {
+  display: block;
+  padding-bottom: 4px;
+  text-align: center;
+  color: #9c3022;
+  font-size: 9px;
+  font-weight: 1000;
+  letter-spacing: .8px;
+}
+
+.life-time-wheel-track {
+  height: 132px;
+  overflow-y: auto;
+  padding: 3px;
+  border: 2px solid #c58d27;
+  border-radius: 10px;
+  background: rgba(255,249,200,.72);
+  scrollbar-width: thin;
+  scrollbar-color: #ba3427 #f6d45d;
+}
+
+.life-time-choice {
+  width: 100%;
+  min-height: 27px;
+  margin-bottom: 3px;
+  border: 1px solid #d4a43a;
+  border-radius: 8px;
+  color: #74411f;
+  background:
+    linear-gradient(180deg, #fff9d2, #f5dda0);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 1px 1px rgba(102,63,24,.12);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.life-time-choice:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.life-time-choice.selected {
+  border-color: #7f211b;
+  color: #fff8d5;
+  background:
+    linear-gradient(180deg, #dc4935, #a92922);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.22),
+    inset 0 -2px 0 rgba(82,19,15,.24),
+    0 2px 0 #7f211b;
+}
+
+.life-time-periods {
+  display: grid;
+  gap: 7px;
+}
+
+.life-time-choice.period-choice {
+  min-height: 48px;
+  margin: 0;
+}
+
+.life-time-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.life-time-clear,
+.life-time-set {
+  min-height: 34px;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.life-time-clear {
+  min-width: 65px;
+  border: 2px solid #a46a24;
+  color: #77441f;
+  background:
+    linear-gradient(180deg, #fff6bc, #e9c765);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.65),
+    0 2px 0 #a46a24;
+}
+
+.life-time-set {
+  flex: 1;
+  border: 2px solid #772019;
+  color: #fff7c8;
+  text-shadow: 0 1px 0 rgba(82,17,13,.5);
+  background:
+    linear-gradient(180deg, #e65039, #a92a22);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.22),
+    0 3px 0 #772019;
+}
+
+.life-time-clear:active,
+.life-time-set:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+/* Keep both Work clocks inside the room walls. */
+
+.work-time-row .life-time-picker:first-child .life-time-popover {
+  left: 0;
+  transform: none;
+}
+
+.work-time-row .life-time-picker:first-child .life-time-popover::before {
+  left: 38px;
+  transform: rotate(45deg);
+}
+
+.work-time-row .life-time-picker:last-child .life-time-popover {
+  left: auto;
+  right: -12px;
+  transform: none;
+}
+
+.work-time-row .life-time-picker:last-child .life-time-popover::before {
+  left: auto;
+  right: 50px;
+  transform: rotate(45deg);
+}
+
+/* ==========================================================
+   💜 APPOINTMENT PURPLE MACHINERY 006.B.5 — START
+   Same Life Wallet machinery. Purple clubhouse candy shell.
+   ========================================================== */
+
+.appointment-picker-field {
+  position: relative;
+  min-width: 0;
+}
+
+.appointment-picker-field .life-calendar,
+.appointment-picker-field .life-time-picker {
+  width: 100%;
+}
+
+/* ── Purple calendar ─────────────────────────────────────── */
+
+.life-calendar-purple .life-calendar-trigger {
+  border-color: #6b327f;
+
+  background:
+    linear-gradient(
+      180deg,
+      #b46bc9,
+      #7b3c96
+    );
+
+  color: #fff7c9;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.28),
+    0 3px 0 #4a2559;
+}
+
+.life-calendar-purple .life-calendar-popover {
+  border-color: #5b286f;
+
+  background:
+    linear-gradient(
+      180deg,
+      #9a50b3,
+      #6b327f
+    );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.18),
+    0 8px 18px rgba(45,20,54,.34);
+}
+
+.life-calendar-purple .life-calendar-cap {
+  color: #fff2a8;
+  text-shadow: 0 2px 0 rgba(58,20,71,.55);
+}
+
+.life-calendar-purple .life-calendar-nav {
+  border-color: #b17b2d;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff3b0,
+      #eac75f
+    );
+
+  color: #70471f;
+}
+
+.life-calendar-purple .life-calendar-day {
+  border-color: #704083;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f3d8f8,
+      #d7a8e2
+    );
+
+  color: #51265f;
+}
+
+.life-calendar-purple .life-calendar-day:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #fff1a8,
+      #f1cf62
+    );
+
+  color: #633d1e;
+}
+
+.life-calendar-purple .life-calendar-day.selected {
+  border-color: #9b681f;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff0a0,
+      #e9bd45
+    );
+
+  color: #5e3a18;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.4),
+    0 2px 0 #744b1c;
+}
+
+.life-calendar-purple .life-calendar-clear,
+.life-calendar-purple .life-calendar-today {
+  border-color: #704083;
+
+  background:
+    linear-gradient(
+      180deg,
+      #c47bd6,
+      #8b469f
+    );
+
+  color: #fff8cf;
+}
+
+.life-calendar-purple .life-calendar-today {
+  border-color: #b17b2d;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff3b0,
+      #edca63
+    );
+
+  color: #70471f;
+}
+
+/* ── Purple clockwork ────────────────────────────────────── */
+
+.life-time-purple .life-time-trigger {
+  border-color: #6b327f;
+
+  background:
+    linear-gradient(
+      180deg,
+      #b46bc9,
+      #7b3c96
+    );
+
+  color: #fff7c9;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.28),
+    0 3px 0 #4a2559;
+}
+
+.life-time-purple .life-time-popover {
+  border-color: #5b286f;
+
+  background:
+    linear-gradient(
+      180deg,
+      #9a50b3,
+      #6b327f
+    );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.18),
+    0 8px 18px rgba(45,20,54,.34);
+}
+
+.life-time-purple .life-time-label,
+.life-time-purple .life-time-period-label {
+  color: #fff0a8;
+}
+
+.life-time-purple .life-time-step,
+.life-time-purple .life-time-period-button {
+  border-color: #704083;
+
+  background:
+    linear-gradient(
+      180deg,
+      #efd1f5,
+      #c993d5
+    );
+
+  color: #542568;
+}
+
+.life-time-purple .life-time-step.active,
+.life-time-purple .life-time-period-button.active {
+  border-color: #a76e1f;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff1a5,
+      #edc653
+    );
+
+  color: #633d1e;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.35),
+    0 2px 0 #76501d;
+}
+
+.life-time-purple .life-time-clear {
+  border-color: #b17b2d;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff3b0,
+      #f2cf68
+    );
+
+  color: #734a27;
+}
+
+.life-time-purple .life-time-set {
+  border-color: #542568;
+
+  background:
+    linear-gradient(
+      180deg,
+      #a961c1,
+      #71358f
+    );
+
+  color: #fff7c9;
+
+  text-shadow: 0 1px 0 rgba(58,20,71,.58);
+}
+
+/* ── Appointment popup geometry ─────────────────────────── */
+
+.appointment-picker-field .life-calendar-popover {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+
+.appointment-picker-field .life-calendar-popover::before {
+  left: 42px;
+  right: auto;
+}
+
+.appointment-time-field .life-time-popover {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.appointment-time-field .life-time-popover::before {
+  left: auto;
+  right: 38px;
+  transform: rotate(45deg);
+}
+
+/* 💜 END 006.B.5 */

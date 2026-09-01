@@ -58,12 +58,223 @@ type TaskItem = {
   done: boolean;
 };
 
+/* ==========================================================
+   ⏰ LIFE WALLET CLOCKWORK PICKER 006.A
+   Keeps boring HH:mm underneath a ridiculous little clock.
+   ========================================================== */
+
+type LifeTimePickerProps = {
+  value: string;
+  label: string;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  onChange: (value: string) => void;
+  variant?: "purple";
+};
+
+function LifeTimePicker({
+  value,
+  label,
+  isOpen,
+  onOpen,
+  onClose,
+  onChange,
+  variant,
+}: LifeTimePickerProps) {
+  const parseTime = (time: string) => {
+    const [rawHour, rawMinute] = time.split(":").map(Number);
+
+    const safeHour =
+      Number.isFinite(rawHour) && rawHour >= 0 && rawHour <= 23
+        ? rawHour
+        : 8;
+
+    const safeMinute =
+      Number.isFinite(rawMinute) && rawMinute >= 0 && rawMinute <= 59
+        ? rawMinute
+        : 0;
+
+    return {
+      hour: safeHour % 12 || 12,
+      minute: safeMinute,
+      period: (safeHour >= 12 ? "PM" : "AM") as "AM" | "PM",
+    };
+  };
+
+  const parsed = parseTime(value);
+
+  const [draftHour, setDraftHour] = useState(parsed.hour);
+  const [draftMinute, setDraftMinute] = useState(parsed.minute);
+  const [draftPeriod, setDraftPeriod] =
+    useState<"AM" | "PM">(parsed.period);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const next = parseTime(value);
+    setDraftHour(next.hour);
+    setDraftMinute(next.minute);
+    setDraftPeriod(next.period);
+  }, [isOpen, value]);
+
+  const toTwentyFourHour = () => {
+    let hour = draftHour % 12;
+
+    if (draftPeriod === "PM") {
+      hour += 12;
+    }
+
+    return `${String(hour).padStart(2, "0")}:${String(
+      draftMinute
+    ).padStart(2, "0")}`;
+  };
+
+  const displayValue = value
+    ? new Date(`2000-01-01T${value}:00`).toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit",
+      })
+    : "Pick a time";
+
+  const minutes = Array.from({ length: 12 }, (_, index) => index * 5);
+
+  return (
+    <div className={`life-time-picker ${isOpen ? "open" : ""} ${variant ? `life-time-${variant}` : ""}`}>
+      <span className="life-time-label">{label}</span>
+
+      <button
+        type="button"
+        className="life-time-trigger"
+        onClick={() => (isOpen ? onClose() : onOpen())}
+        aria-expanded={isOpen}
+      >
+        <span className="life-time-trigger-icon">⏰</span>
+        <strong>{displayValue}</strong>
+        <span className="life-time-trigger-arrow">
+          {isOpen ? "▲" : "▼"}
+        </span>
+      </button>
+
+      {isOpen && (
+        <div className="life-time-popover">
+          <div className="life-time-cap">
+            <span>⏰</span>
+            <strong>SET THE CLOCK</strong>
+            <span>⏰</span>
+          </div>
+
+          <div className="life-time-readout">
+            {String(draftHour).padStart(2, "0")}
+            <span className="life-time-colon">:</span>
+            {String(draftMinute).padStart(2, "0")}
+            <span className="life-time-period-readout">
+              {draftPeriod}
+            </span>
+          </div>
+
+          <div className="life-time-wheels">
+            <div className="life-time-wheel">
+              <span className="life-time-wheel-title">HOUR</span>
+
+              <div className="life-time-wheel-track">
+                {Array.from({ length: 12 }, (_, index) => index + 1).map(
+                  (hour) => (
+                    <button
+                      type="button"
+                      key={hour}
+                      className={
+                        draftHour === hour
+                          ? "life-time-choice selected"
+                          : "life-time-choice"
+                      }
+                      onClick={() => setDraftHour(hour)}
+                    >
+                      {String(hour).padStart(2, "0")}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="life-time-wheel">
+              <span className="life-time-wheel-title">MINUTE</span>
+
+              <div className="life-time-wheel-track">
+                {minutes.map((minute) => (
+                  <button
+                    type="button"
+                    key={minute}
+                    className={
+                      draftMinute === minute
+                        ? "life-time-choice selected"
+                        : "life-time-choice"
+                    }
+                    onClick={() => setDraftMinute(minute)}
+                  >
+                    {String(minute).padStart(2, "0")}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="life-time-wheel period">
+              <span className="life-time-wheel-title">SUN</span>
+
+              <div className="life-time-periods">
+                {(["AM", "PM"] as const).map((period) => (
+                  <button
+                    type="button"
+                    key={period}
+                    className={
+                      draftPeriod === period
+                        ? "life-time-choice period-choice selected"
+                        : "life-time-choice period-choice"
+                    }
+                    onClick={() => setDraftPeriod(period)}
+                  >
+                    {period}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="life-time-footer">
+            <button
+              type="button"
+              className="life-time-clear"
+              onClick={() => {
+                onChange("");
+                onClose();
+              }}
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              className="life-time-set"
+              onClick={() => {
+                onChange(toTwentyFourHour());
+                onClose();
+              }}
+            >
+              ✓ Set time
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 type LifeCalendarProps = {
   value: string;
   onChange: (value: string) => void;
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
+  variant?: "purple";
 };
 
 function LifeCalendar({
@@ -72,6 +283,7 @@ function LifeCalendar({
   isOpen,
   onOpen,
   onClose,
+  variant,
 }: LifeCalendarProps) {
   const parseISODate = (iso: string) => {
     if (!iso) return null;
@@ -157,7 +369,7 @@ function LifeCalendar({
   );
 
   return (
-    <div className={`life-calendar ${isOpen ? "open" : ""}`}>
+    <div className={`life-calendar ${isOpen ? "open" : ""} ${variant ? `life-calendar-${variant}` : ""}`}>
       <button
         type="button"
         className="life-calendar-trigger"
@@ -893,6 +1105,10 @@ function App() {
 
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [appointmentTitle, setAppointmentTitle] = useState("");
+  /* 💜 APPOINTMENT MACHINERY 006.B */
+  const [openAppointmentPicker, setOpenAppointmentPicker] =
+    useState<"date" | "time" | null>(null);
+
   const [appointmentDate, setAppointmentDate] = useState("");
   const [appointmentTime, setAppointmentTime] = useState("");
   const [appointmentPlace, setAppointmentPlace] = useState("");
@@ -930,6 +1146,9 @@ function App() {
     Saturday: false,
     Sunday: false,
   });
+
+  const [openWorkTimePicker, setOpenWorkTimePicker] =
+    useState<"start" | "end" | null>(null);
 
   const [workStart, setWorkStart] = useState("08:00");
   const [workEnd, setWorkEnd] = useState("17:00");
@@ -1767,23 +1986,30 @@ function App() {
             />
           </label>
 
-          <label>
-            <span>Date</span>
-            <input
-              type="date"
-              value={appointmentDate}
-              onChange={(e) => setAppointmentDate(e.target.value)}
-            />
-          </label>
+          <label className="appointment-picker-field">
+              <span>Date</span>
 
-          <label>
-            <span>Time</span>
-            <input
-              type="time"
-              value={appointmentTime}
-              onChange={(e) => setAppointmentTime(e.target.value)}
-            />
-          </label>
+              <LifeCalendar
+                value={appointmentDate}
+                isOpen={openAppointmentPicker === "date"}
+                onOpen={() => setOpenAppointmentPicker("date")}
+                onClose={() => setOpenAppointmentPicker(null)}
+                onChange={setAppointmentDate}
+                variant="purple"
+              />
+            </label>
+
+          <div className="appointment-picker-field appointment-time-field">
+              <LifeTimePicker
+                label="Time"
+                value={appointmentTime}
+                isOpen={openAppointmentPicker === "time"}
+                onOpen={() => setOpenAppointmentPicker("time")}
+                onClose={() => setOpenAppointmentPicker(null)}
+                onChange={setAppointmentTime}
+                variant="purple"
+              />
+            </div>
 
           <label className="span-2">
             <span>Where?</span>
@@ -1851,25 +2077,25 @@ function App() {
           <div className="life-card-title">🕐 Normal hours</div>
 
           <div className="work-time-row">
-            <label>
-              <span>Start</span>
-              <input
-                type="time"
-                value={workStart}
-                onChange={(e) => setWorkStart(e.target.value)}
-              />
-            </label>
+            <LifeTimePicker
+              label="Start"
+              value={workStart}
+              isOpen={openWorkTimePicker === "start"}
+              onOpen={() => setOpenWorkTimePicker("start")}
+              onClose={() => setOpenWorkTimePicker(null)}
+              onChange={setWorkStart}
+            />
 
             <span className="work-arrow">→</span>
 
-            <label>
-              <span>End</span>
-              <input
-                type="time"
-                value={workEnd}
-                onChange={(e) => setWorkEnd(e.target.value)}
-              />
-            </label>
+            <LifeTimePicker
+              label="End"
+              value={workEnd}
+              isOpen={openWorkTimePicker === "end"}
+              onOpen={() => setOpenWorkTimePicker("end")}
+              onClose={() => setOpenWorkTimePicker(null)}
+              onChange={setWorkEnd}
+            />
           </div>
 
           <textarea
