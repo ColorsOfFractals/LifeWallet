@@ -274,7 +274,7 @@ type LifeCalendarProps = {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  variant?: "purple" | "orange-blue";
+  variant?: "purple" | "orange-blue" | "orange-green";
 };
 
 function LifeCalendar({
@@ -1161,6 +1161,9 @@ function App() {
 
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [taskTitle, setTaskTitle] = useState("");
+  /* 🟧🟩 TASK CALENDAR MACHINERY 006.D */
+  const [openTaskCalendar, setOpenTaskCalendar] = useState(false);
+
   const [taskDue, setTaskDue] = useState("");
   const [taskPriority, setTaskPriority] =
     useState<TaskItem["priority"]>("Normal");
@@ -2165,14 +2168,17 @@ function App() {
               />
             </label>
 
-            <label>
-              <span>Due</span>
-              <input
-                type="date"
-                value={taskDue}
-                onChange={(e) => setTaskDue(e.target.value)}
-              />
-            </label>
+            <label className="task-calendar-field">
+                <span>Due</span>
+                <LifeCalendar
+                  value={taskDue}
+                  isOpen={openTaskCalendar}
+                  onOpen={() => setOpenTaskCalendar(true)}
+                  onClose={() => setOpenTaskCalendar(false)}
+                  onChange={setTaskDue}
+                  variant="orange-green"
+                />
+              </label>
 
             <label>
               <span>Weight</span>

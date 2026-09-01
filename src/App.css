@@ -7943,3 +7943,183 @@ footer {
 }
 
 /* 🧡💙 END 006.C.2 */
+/* ==========================================================
+   🟧🟩 TASK CALENDAR MACHINERY 006.D — START
+   Same LifeCalendar organism. Task-room orange + green shell.
+   ========================================================== */
+
+.task-calendar-field {
+  position: relative;
+  min-width: 0;
+}
+
+.task-calendar-field .life-calendar {
+  width: 100%;
+}
+
+.life-calendar-orange-green .life-calendar-trigger {
+  border-color: #347445;
+  color: #315f38;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff1ae 0%,
+      #ffd66c 56%,
+      #efaa3f 100%
+    );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.72),
+    inset 0 -3px 0 rgba(151,88,25,.22),
+    0 4px 0 #37663d,
+    0 6px 9px rgba(57,65,35,.22);
+}
+
+.life-calendar-orange-green .life-calendar-trigger-arrow {
+  color: #367446;
+}
+
+.life-calendar-orange-green .life-calendar-popover {
+  border-color: #326b40;
+
+  background:
+    linear-gradient(
+      180deg,
+      #63a55e 0%,
+      #468c50 58%,
+      #34733f 100%
+    );
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.24),
+    inset 0 -4px 0 rgba(31,78,38,.28),
+    0 7px 0 #285a35,
+    0 12px 18px rgba(44,57,31,.28);
+}
+
+.life-calendar-orange-green .life-calendar-popover::before {
+  background: #4d9253;
+  border-color: #326b40;
+}
+
+.life-calendar-orange-green .life-calendar-cap {
+  border-color: #326b40;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f6a443,
+      #dc7b2f
+    );
+
+  color: #fff8d1;
+
+  text-shadow: 0 2px 0 rgba(103,54,20,.65);
+}
+
+.life-calendar-orange-green .life-calendar-nav {
+  border-color: #367546;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8b354,
+      #e48832
+    );
+
+  color: #285f37;
+}
+
+.life-calendar-orange-green .life-calendar-weekdays {
+  color: #326c40;
+}
+
+.life-calendar-orange-green .life-calendar-day {
+  border-color: rgba(71,112,55,.38);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff7d1,
+      #ffe59b
+    );
+
+  color: #48603c;
+}
+
+.life-calendar-orange-green .life-calendar-day.today {
+  border-color: #e18a31;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffc56c,
+      #ed8e35
+    );
+}
+
+.life-calendar-orange-green .life-calendar-day.selected {
+  border-color: #285d37;
+
+  background:
+    linear-gradient(
+      180deg,
+      #63a45c,
+      #397b46
+    );
+
+  color: #fff8d4;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.23),
+    0 2px 0 #285a35;
+}
+
+.life-calendar-orange-green .life-calendar-day.selected.today {
+  outline-color: #f2a243;
+}
+
+.life-calendar-orange-green .life-calendar-clear {
+  border-color: #347344;
+
+  background:
+    linear-gradient(
+      180deg,
+      #8fc47b,
+      #61a15d
+    );
+
+  color: #214f31;
+}
+
+.life-calendar-orange-green .life-calendar-today {
+  border-color: #b56527;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7aa4a,
+      #dc7b2f
+    );
+
+  color: #fff8d0;
+
+  text-shadow: 0 1px 0 rgba(104,52,18,.58);
+}
+
+/*
+   Task Due lives in the form: open inward from the left.
+*/
+.task-calendar-field .life-calendar-popover {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+
+.task-calendar-field .life-calendar-popover::before {
+  left: 42px;
+  right: auto;
+}
+
+/* 🟧🟩 END TASK CALENDAR MACHINERY 006.D */
