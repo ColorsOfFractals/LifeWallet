@@ -8354,3 +8354,88 @@ footer {
 }
 
 /* 🥕 END GROCERY LIFESELECT 006.E.2 */
+/* ==========================================================
+   💛💙 SUBSCRIPTION LIFESELECT 006.F — START
+   Same LifeSelect organism. Yellow face + blue billing shell.
+   ========================================================== */
+
+.life-select-subscription .life-select-trigger {
+  border-color: #9a7422;
+  color: #654814;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.48), transparent 42%),
+    linear-gradient(180deg, #ffe58b 0%, #f2c84f 58%, #dba72d 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.72),
+    inset 0 -3px 0 rgba(126,88,18,.18),
+    0 3px 0 #8d681d,
+    0 5px 8px rgba(73,53,24,.18);
+}
+
+.life-select-subscription .life-select-trigger-arrow {
+  color: #2877a8;
+}
+
+.life-select-subscription .life-select-popover {
+  border-color: #205f89;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent 28%),
+    linear-gradient(180deg, #62b7dc 0%, #338ab7 52%, #246b98 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.28),
+    0 7px 0 rgba(27,73,104,.30),
+    0 12px 18px rgba(42,57,70,.20);
+}
+
+.life-select-subscription .life-select-popover::before {
+  border-top-color: #205f89;
+  border-left-color: #205f89;
+  background: #5aafd6;
+}
+
+.life-select-subscription .life-select-cap {
+  border-color: #987020;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.42), transparent 44%),
+    linear-gradient(180deg, #ffe37c, #e8b83b);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.55),
+    0 3px 0 #846019;
+}
+
+.life-select-subscription .life-select-cap strong {
+  color: #365d78;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+}
+
+.life-select-subscription .life-select-option {
+  border-color: #2c719a;
+  color: #38596a;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.55), transparent 42%),
+    linear-gradient(180deg, #fff5bd, #efd276);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    0 2px 0 rgba(27,82,115,.55);
+}
+
+.life-select-subscription .life-select-option:hover {
+  border-color: #987020;
+  color: #624915;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.42), transparent 42%),
+    linear-gradient(180deg, #ffe68a, #e8b93e);
+}
+
+.life-select-subscription .life-select-option.selected {
+  border-color: #174f77;
+  color: #fff8cf;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22), transparent 42%),
+    linear-gradient(180deg, #58a9d0, #2d7fae);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.28),
+    0 2px 0 #174f77;
+}
+
+/* 💛💙 END SUBSCRIPTION LIFESELECT 006.F */

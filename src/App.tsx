@@ -286,7 +286,9 @@ type LifeSelectProps = {
   onClose: () => void;
   onChange: (value: string) => void;
   placeholder?: string;
-  variant?: "grocery";
+  capLabel?: string;
+  ariaLabel?: string;
+  variant?: "grocery" | "subscription";
 };
 
 function LifeSelect({
@@ -297,6 +299,8 @@ function LifeSelect({
   onClose,
   onChange,
   placeholder = "Choose one",
+  capLabel = "Choose one",
+  ariaLabel = "Options",
   variant,
 }: LifeSelectProps) {
   const selected =
@@ -338,13 +342,13 @@ function LifeSelect({
       {isOpen && (
         <div className="life-select-popover">
           <div className="life-select-cap">
-            <strong>Pick a category</strong>
+            <strong>{capLabel}</strong>
           </div>
 
           <div
             className="life-select-options"
             role="listbox"
-            aria-label="Grocery category"
+            aria-label={ariaLabel}
           >
             {options.map((option) => {
               const active = option.value === value;
@@ -1059,6 +1063,9 @@ function App() {
   const [subAmount, setSubAmount] = useState("");
   const [subCadence, setSubCadence] =
     useState<Subscription["cadence"]>("monthly");
+  /* 💛💙 SUBSCRIPTION LIFESELECT MACHINERY 006.F */
+  const [openSubscriptionSelect, setOpenSubscriptionSelect] =
+    useState(false);
 
   const monthlySubscriptionTotal = useMemo(
     () =>
@@ -1393,15 +1400,23 @@ function App() {
 
             <label>
               <span>Charged</span>
-              <select
-                value={subCadence}
-                onChange={(e) =>
-                  setSubCadence(e.target.value as Subscription["cadence"])
-                }
-              >
-                <option value="monthly">Monthly</option>
-                <option value="yearly">Yearly</option>
-              </select>
+              <LifeSelect
+                  value={subCadence}
+                  options={[
+                    { value: "monthly", label: "Monthly" },
+                    { value: "yearly", label: "Yearly" },
+                  ]}
+                  isOpen={openSubscriptionSelect}
+                  onOpen={() => setOpenSubscriptionSelect(true)}
+                  onClose={() => setOpenSubscriptionSelect(false)}
+                  onChange={(value) =>
+                    setSubCadence(value as Subscription["cadence"])
+                  }
+                  placeholder="Monthly"
+                  capLabel="Billing cycle"
+                  ariaLabel="Subscription billing cycle"
+                  variant="subscription"
+                />
             </label>
           </div>
 
@@ -1879,6 +1894,8 @@ function App() {
             onClose={() => setOpenGrocerySelect(false)}
             onChange={setGroceryCategory}
             placeholder="General"
+            capLabel="Pick a category"
+            ariaLabel="Grocery category"
             variant="grocery"
           />
 
