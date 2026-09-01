@@ -268,6 +268,108 @@ function LifeTimePicker({
     </div>
   );
 }
+/* ==========================================================
+   🥕 GROCERY LIFESELECT MACHINERY 006.E.2
+   Reusable controlled dropdown. Grocery is first tenant.
+   ========================================================== */
+
+type LifeSelectOption = {
+  value: string;
+  label: string;
+};
+
+type LifeSelectProps = {
+  value: string;
+  options: LifeSelectOption[];
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  variant?: "grocery";
+};
+
+function LifeSelect({
+  value,
+  options,
+  isOpen,
+  onOpen,
+  onClose,
+  onChange,
+  placeholder = "Choose one",
+  variant,
+}: LifeSelectProps) {
+  const selected =
+    options.find((option) => option.value === value) ?? null;
+
+  const choose = (nextValue: string) => {
+    onChange(nextValue);
+    onClose();
+  };
+
+  return (
+    <div
+      className={`life-select ${isOpen ? "open" : ""} ${
+        variant ? `life-select-${variant}` : ""
+      }`}
+    >
+      <button
+        type="button"
+        className="life-select-trigger"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        onClick={() => {
+          if (isOpen) {
+            onClose();
+          } else {
+            onOpen();
+          }
+        }}
+      >
+        <span className="life-select-trigger-label">
+          {selected ? selected.label : placeholder}
+        </span>
+
+        <span className="life-select-trigger-arrow" aria-hidden="true">
+          ▼
+        </span>
+      </button>
+
+      {isOpen && (
+        <div className="life-select-popover">
+          <div className="life-select-cap">
+            <strong>Pick a category</strong>
+          </div>
+
+          <div
+            className="life-select-options"
+            role="listbox"
+            aria-label="Grocery category"
+          >
+            {options.map((option) => {
+              const active = option.value === value;
+
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  role="option"
+                  aria-selected={active}
+                  className={`life-select-option ${
+                    active ? "selected" : ""
+                  }`}
+                  onClick={() => choose(option.value)}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 type LifeCalendarProps = {
   value: string;
   onChange: (value: string) => void;
@@ -1038,6 +1140,7 @@ function App() {
 
   const [groceries, setGroceries] = useState<GroceryItem[]>([]);
   const [groceryName, setGroceryName] = useState("");
+  const [openGrocerySelect, setOpenGrocerySelect] = useState(false);
   const [groceryCategory, setGroceryCategory] = useState("General");
 
   const addGrocery = () => {
@@ -1761,17 +1864,23 @@ function App() {
             placeholder="What ran out?"
           />
 
-          <select
+          <LifeSelect
             value={groceryCategory}
-            onChange={(e) => setGroceryCategory(e.target.value)}
-          >
-            <option>General</option>
-            <option>Produce</option>
-            <option>Fridge</option>
-            <option>Freezer</option>
-            <option>Pantry</option>
-            <option>Household</option>
-          </select>
+            options={[
+              { value: "General", label: "General" },
+              { value: "Produce", label: "Produce" },
+              { value: "Fridge", label: "Fridge" },
+              { value: "Freezer", label: "Freezer" },
+              { value: "Pantry", label: "Pantry" },
+              { value: "Household", label: "Household" },
+            ]}
+            isOpen={openGrocerySelect}
+            onOpen={() => setOpenGrocerySelect(true)}
+            onClose={() => setOpenGrocerySelect(false)}
+            onChange={setGroceryCategory}
+            placeholder="General"
+            variant="grocery"
+          />
 
           <button className="life-action-button" onClick={addGrocery}>
             Toss it in
