@@ -274,7 +274,7 @@ type LifeCalendarProps = {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  variant?: "purple";
+  variant?: "purple" | "orange-blue";
 };
 
 function LifeCalendar({
@@ -1079,6 +1079,7 @@ function App() {
   const [friendPlans, setFriendPlans] = useState<FriendPlan[]>([]);
   const [friendName, setFriendName] = useState("");
   const [friendPlan, setFriendPlan] = useState("");
+  const [openFriendCalendar, setOpenFriendCalendar] = useState(false);
   const [friendDate, setFriendDate] = useState("");
 
   const addFriendPlan = () => {
@@ -1919,14 +1920,17 @@ function App() {
             />
           </label>
 
-          <label>
-            <span>When?</span>
-            <input
-              type="date"
-              value={friendDate}
-              onChange={(e) => setFriendDate(e.target.value)}
-            />
-          </label>
+          <label className="friend-calendar-field">
+              <span>When?</span>
+              <LifeCalendar
+                value={friendDate}
+                isOpen={openFriendCalendar}
+                onOpen={() => setOpenFriendCalendar(true)}
+                onClose={() => setOpenFriendCalendar(false)}
+                onChange={setFriendDate}
+                variant="orange-blue"
+              />
+            </label>
         </div>
 
         <button className="life-action-button" onClick={addFriendPlan}>

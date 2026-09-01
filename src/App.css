@@ -7821,3 +7821,125 @@ footer {
 }
 
 /* 💜 END 006.B.5 */
+/* ==========================================================
+   🧡💙 FRIEND ORANGE BLUE CALENDAR 006.C.2 — START
+   Same LifeCalendar organism. Friend-room candy shell.
+   ========================================================== */
+
+.friend-calendar-field {
+  position: relative;
+  min-width: 0;
+}
+
+.friend-calendar-field .life-calendar {
+  width: 100%;
+}
+
+.life-calendar-orange-blue .life-calendar-trigger {
+  border-color: #185f89;
+  color: #174d6e;
+  background:
+    linear-gradient(
+      180deg,
+      #edfaff 0%,
+      #b9dfef 52%,
+      #83bfd9 100%
+    );
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.78),
+    inset 0 -3px 0 rgba(24,95,137,.16),
+    0 3px 0 #185f89,
+    0 5px 8px rgba(36,83,107,.18);
+}
+
+.life-calendar-orange-blue .life-calendar-popover {
+  border-color: #185f89;
+  background:
+    linear-gradient(
+      180deg,
+      #69b8dc 0%,
+      #368ab4 48%,
+      #216889 100%
+    );
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.30),
+    inset 0 -5px 0 rgba(20,76,105,.28),
+    0 7px 0 rgba(87,74,52,.24),
+    0 12px 20px rgba(57,61,57,.22);
+}
+
+.life-calendar-orange-blue .life-calendar-popover::before {
+  border-left-color: #185f89;
+  border-top-color: #185f89;
+  background: #69b8dc;
+}
+
+.life-calendar-orange-blue .life-calendar-day {
+  border-color: #d7832c;
+  color: #71330e;
+  background:
+    linear-gradient(
+      180deg,
+      #fff0ce,
+      #ffc875
+    );
+}
+
+.life-calendar-orange-blue .life-calendar-day:hover {
+  filter: brightness(1.06);
+}
+
+.life-calendar-orange-blue .life-calendar-day.selected {
+  border-color: #9c4714;
+  color: #fff8e9;
+  background:
+    linear-gradient(
+      180deg,
+      #ff9c45,
+      #e66f24
+    );
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.30),
+    0 2px 0 #994814;
+}
+
+.life-calendar-orange-blue .life-calendar-day.today {
+  outline-color: #ffb34e;
+}
+
+.life-calendar-orange-blue .life-calendar-clear {
+  border-color: #185f89;
+  color: #174d6e;
+  background:
+    linear-gradient(
+      180deg,
+      #edfaff,
+      #b9dfef
+    );
+}
+
+.life-calendar-orange-blue .life-calendar-today {
+  border-color: #a85017;
+  color: #71330e;
+  background:
+    linear-gradient(
+      180deg,
+      #ffc875,
+      #ee8a34
+    );
+}
+
+/* ── Friends popup geometry ─────────────────────────────── */
+
+.friend-calendar-field .life-calendar-popover {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+
+.friend-calendar-field .life-calendar-popover::before {
+  left: 42px;
+  right: auto;
+}
+
+/* 🧡💙 END 006.C.2 */
