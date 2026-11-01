@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { loadWallet, saveWallet } from "./walletStorage";
+import { isWalletData, type WalletData } from "./walletSchema";
 import "./App.css";
 
 type Area = {
@@ -1297,6 +1299,106 @@ function App() {
     setTaskPriority("Normal");
   };
 
+  // BAKE 6B | Hydrate before any write. Failed reads permanently block writes this session.
+  const [walletReady, setWalletReady] = useState(false);
+  const [walletWriteBlocked, setWalletWriteBlocked] = useState(false);
+  const walletHydrationStarted = useRef(false);
+
+  useEffect(() => {
+    // StrictMode may replay effects; one in-flight load serves both passes.
+    if (walletHydrationStarted.current) return;
+    walletHydrationStarted.current = true;
+    void loadWallet(isWalletData)
+      .then((saved) => {
+        if (saved !== null) {
+        setSelectedCompanionId(saved.selectedCompanionId);
+        setNicheEntries(saved.nicheEntries);
+        setJournalEntries(saved.journalEntries);
+        setSubscriptions(saved.subscriptions);
+        setCarAmount(saved.carAmount);
+        setCarDueDay(saved.carDueDay);
+        setCarLender(saved.carLender);
+        setCarAutopay(saved.carAutopay);
+        setCarNote(saved.carNote);
+        setHomeAmount(saved.homeAmount);
+        setHomeDueDay(saved.homeDueDay);
+        setHomePayee(saved.homePayee);
+        setHomeAutopay(saved.homeAutopay);
+        setHomePointer(saved.homePointer);
+        setInternetProvider(saved.internetProvider);
+        setInternetAmount(saved.internetAmount);
+        setInternetDue(saved.internetDue);
+        setInternetPlan(saved.internetPlan);
+        setInternetSupport(saved.internetSupport);
+        setPhoneCarrier(saved.phoneCarrier);
+        setPhoneAmount(saved.phoneAmount);
+        setPhoneDue(saved.phoneDue);
+        setDeviceBalance(saved.deviceBalance);
+        setPhoneAutopay(saved.phoneAutopay);
+        setGroceries(saved.groceries);
+        setLaundryDates(saved.laundryDates);
+        setFriendPlans(saved.friendPlans);
+        setAppointments(saved.appointments);
+        setWorkDays(saved.workDays);
+        setWorkStart(saved.workStart);
+        setWorkEnd(saved.workEnd);
+        setWorkNote(saved.workNote);
+        setTasks(saved.tasks);
+        }
+        setWalletReady(true);
+      })
+      .catch((error: unknown) => {
+        console.error("Life Wallet: hydration failed; autosave disabled.", error);
+        setWalletWriteBlocked(true);
+      });
+  }, []);
+
+  const walletSnapshot = useMemo<WalletData>(() => ({
+    selectedCompanionId,
+    nicheEntries,
+    journalEntries,
+    subscriptions,
+    carAmount,
+    carDueDay,
+    carLender,
+    carAutopay,
+    carNote,
+    homeAmount,
+    homeDueDay,
+    homePayee,
+    homeAutopay,
+    homePointer,
+    internetProvider,
+    internetAmount,
+    internetDue,
+    internetPlan,
+    internetSupport,
+    phoneCarrier,
+    phoneAmount,
+    phoneDue,
+    deviceBalance,
+    phoneAutopay,
+    groceries,
+    laundryDates,
+    friendPlans,
+    appointments,
+    workDays,
+    workStart,
+    workEnd,
+    workNote,
+    tasks,
+  }), [selectedCompanionId, nicheEntries, journalEntries, subscriptions, carAmount, carDueDay, carLender, carAutopay, carNote, homeAmount, homeDueDay, homePayee, homeAutopay, homePointer, internetProvider, internetAmount, internetDue, internetPlan, internetSupport, phoneCarrier, phoneAmount, phoneDue, deviceBalance, phoneAutopay, groceries, laundryDates, friendPlans, appointments, workDays, workStart, workEnd, workNote, tasks]);
+
+  useEffect(() => {
+    if (!walletReady || walletWriteBlocked) return;
+    const timer = window.setTimeout(() => {
+      void saveWallet(walletSnapshot).catch((error: unknown) => {
+        console.error("Life Wallet: save failed; autosave disabled.", error);
+        setWalletWriteBlocked(true);
+      });
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [walletReady, walletWriteBlocked, walletSnapshot]);
   const active = areas.find((area) => area.id === activeId) ?? areas[0];
 
   const elapsedLabel = (date: string) => {
